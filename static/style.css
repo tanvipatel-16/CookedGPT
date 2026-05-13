@@ -38,6 +38,7 @@ body{
     width:340px;
     z-index:2;
     animation:float 3s ease-in-out infinite;
+
     filter:
     drop-shadow(0 0 40px #b026ff)
     drop-shadow(0 0 80px #7d2cff);
@@ -195,37 +196,25 @@ input[type="range"]{
     border:1px solid rgba(255,255,255,0.08);
 }
 
+/* REMOVE QUICK BUTTONS */
+
 .quick-buttons{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    padding:10px;
-    flex-wrap:wrap;
+    display:none;
 }
 
-.quick-buttons button{
-    padding:12px 22px;
-    border:none;
-    border-radius:40px;
-    background:#111;
-    color:white;
-    cursor:pointer;
-    transition:0.3s;
-    border:1px solid rgba(255,255,255,0.08);
-}
-
-.quick-buttons button:hover{
-    background:#a020f0;
-}
+/* INPUT AREA FIX */
 
 .input-area{
     display:flex;
-    gap:15px;
-    padding:20px;
+    align-items:center;
+    gap:10px;
+    padding:15px;
+    width:100%;
 }
 
 #userInput{
     flex:1;
+    min-width:0;
     padding:18px;
     border:none;
     border-radius:50px;
@@ -236,8 +225,10 @@ input[type="range"]{
 }
 
 #sendButton{
-    width:65px;
-    height:65px;
+    width:55px;
+    height:55px;
+    min-width:55px;
+    flex-shrink:0;
     border:none;
     border-radius:50%;
     background:linear-gradient(45deg,#c44dff,#7d2cff);
@@ -247,7 +238,7 @@ input[type="range"]{
     box-shadow:0 0 20px #a020f0;
 }
 
-/* FLOAT ANIMATION */
+/* FLOAT */
 
 @keyframes float{
 
@@ -342,29 +333,20 @@ input[type="range"]{
         padding:14px 16px;
     }
 
-    .quick-buttons{
-        gap:10px;
-    }
-
-    .quick-buttons button{
-        font-size:13px;
-        padding:10px 14px;
-    }
-
     .input-area{
-        padding:15px;
-        gap:10px;
+        padding:10px;
+        gap:8px;
     }
 
     #userInput{
-        padding:14px;
-        font-size:15px;
+        font-size:14px;
+        padding:12px 16px;
     }
 
     #sendButton{
-        width:55px;
-        height:55px;
+        width:50px;
+        height:50px;
+        min-width:50px;
         font-size:18px;
     }
-
 }
