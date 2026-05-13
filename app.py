@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import os
 from flask import Flask, render_template, request, jsonify
 from groq import Groq
@@ -268,5 +268,4 @@ def chat():
     })
 
 if __name__ == "__main__":
->>>>>>> c9de78b2f9c067d8d336782a361e59b3c0f352dd
     app.run(debug=True)
