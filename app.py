@@ -6,7 +6,7 @@ from groq import Groq
 app = Flask(__name__)
 
 client = Groq(
-    api_key=os.environ.get"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"
+    api_key=os.environ.get"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";
 )
 
 chat_history = []
