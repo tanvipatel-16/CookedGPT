@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const mindButton = document.getElementById("mindButton");
 
 if(mindButton){
@@ -217,6 +217,5 @@ if(sendButton){
 
         }
     );
-
->>>>>>> c9de78b2f9c067d8d336782a361e59b3c0f352dd
+    
 }
