@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap');
 
 *{
@@ -11,7 +10,8 @@
 body{
     background:black;
     color:white;
-    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
 }
 
 /* HERO */
@@ -39,12 +39,11 @@ body{
     z-index:2;
     animation:float 3s ease-in-out infinite;
     filter:
-drop-shadow(0 0 40px #b026ff)
-drop-shadow(0 0 80px #7d2cff);
+    drop-shadow(0 0 40px #b026ff)
+    drop-shadow(0 0 80px #7d2cff);
 
-mix-blend-mode:screen;
-
-opacity:0.95;
+    mix-blend-mode:screen;
+    opacity:0.95;
 }
 
 .hero h1{
@@ -238,6 +237,7 @@ input[type="range"]{
 
 #sendButton{
     width:65px;
+    height:65px;
     border:none;
     border-radius:50%;
     background:linear-gradient(45deg,#c44dff,#7d2cff);
@@ -246,6 +246,8 @@ input[type="range"]{
     cursor:pointer;
     box-shadow:0 0 20px #a020f0;
 }
+
+/* FLOAT ANIMATION */
 
 @keyframes float{
 
@@ -260,4 +262,109 @@ input[type="range"]{
     100%{
         transform:translateY(0px);
     }
+}
 
+/* MOBILE RESPONSIVE */
+
+@media (max-width:768px){
+
+    body{
+        overflow-x:hidden;
+        overflow-y:auto;
+    }
+
+    .hero{
+        padding:20px;
+        text-align:center;
+    }
+
+    .hero h1{
+        font-size:42px;
+        letter-spacing:2px;
+    }
+
+    .tagline{
+        font-size:14px;
+        letter-spacing:2px;
+    }
+
+    .cooker{
+        width:220px;
+    }
+
+    .enter-btn{
+        padding:14px 35px;
+        font-size:18px;
+    }
+
+    .warning-box{
+        width:90%;
+        font-size:14px;
+        padding:10px 15px;
+    }
+
+    .top-bar{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+
+    .top-bar h1{
+        font-size:28px;
+    }
+
+    #currentMood{
+        width:90%;
+    }
+
+    .moods{
+        gap:10px;
+        padding:15px;
+    }
+
+    .mood-btn{
+        padding:10px 16px;
+        font-size:14px;
+    }
+
+    .intensity-box{
+        width:90%;
+    }
+
+    .chat-box{
+        padding:15px;
+    }
+
+    .user-message,
+    .ai-message{
+        max-width:90%;
+        font-size:14px;
+        padding:14px 16px;
+    }
+
+    .quick-buttons{
+        gap:10px;
+    }
+
+    .quick-buttons button{
+        font-size:13px;
+        padding:10px 14px;
+    }
+
+    .input-area{
+        padding:15px;
+        gap:10px;
+    }
+
+    #userInput{
+        padding:14px;
+        font-size:15px;
+    }
+
+    #sendButton{
+        width:55px;
+        height:55px;
+        font-size:18px;
+    }
+
+}
