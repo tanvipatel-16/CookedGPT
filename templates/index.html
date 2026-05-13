@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CookedGPT</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="hero">
+
+    <div class="hero-overlay"></div>
+
+    <img
+        src="{{ url_for('static', filename='cooker.png') }}"
+        class="cooker"
+    >
+
+    <h1>COOKEDGPT</h1>
+
+    <p class="tagline">
+        THE AI THAT ROASTS • COOKS • DESTROYS
+    </p>
+
+    <button
+        class="enter-btn"
+        onclick="window.location.href='/chatpage'"
+    >
+        OPEN YOUR MIND 🧠
+    </button>
+
+    <div class="warning-box">
+        ⚠ EMOTIONALLY UNSAFE ⚠
+    </div>
+
+</div>
+
+</body>
+</html>
