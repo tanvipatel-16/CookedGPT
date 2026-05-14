@@ -2,8 +2,7 @@ let mood = "savage mode";
 
 let currentChat = [];
 
-const historyList =
-document.getElementById("historyList");
+let allChats = [];
 
 function setMood(m, btn){
 
@@ -17,6 +16,20 @@ function setMood(m, btn){
 }
 
 function openChat(){
+
+    const intensity =
+    document.getElementById("intensity").value;
+
+    document.getElementById("selectedMood")
+    .innerText =
+    "🔥 " + mood.toUpperCase();
+
+    document.getElementById("chatIntensity")
+    .value = intensity;
+
+    document.getElementById("intensityValue")
+    .innerText =
+    "Intensity: " + intensity;
 
     document.getElementById("moodPage")
     .classList.add("page-exit");
@@ -34,20 +47,6 @@ function openChat(){
 
     }, 700);
 
-    document.getElementById("selectedMood")
-    .innerText =
-    "🔥 " + mood.toUpperCase();
-
-    const intensity =
-    document.getElementById("intensity").value;
-
-    document.getElementById("chatIntensity")
-    .value = intensity;
-
-    document.getElementById("intensityValue")
-    .innerText =
-    "Intensity: " + intensity;
-
 }
 
 function syncIntensity(value){
@@ -60,7 +59,16 @@ function syncIntensity(value){
 
 function fakeLogin(){
 
-    alert("Login system coming soon 🚀");
+    const name =
+    prompt("Enter username");
+
+    if(name){
+
+        alert(
+        "Welcome " + name + " 🚀"
+        );
+
+    }
 
 }
 
@@ -68,86 +76,121 @@ function saveConversationSummary(){
 
     if(currentChat.length === 0) return;
 
-    const firstMessage =
-    currentChat[0];
+    const firstUserMessage =
+    currentChat.find(m => m.role === "user");
 
-    const div =
-    document.createElement("div");
+    if(!firstUserMessage) return;
 
-    div.className = "history-item";
+    const summary =
+    firstUserMessage.content.slice(0,40) + "...";
 
-    div.innerText =
-    firstMessage.slice(0, 35) + "...";
+    const fullChat =
+    [...currentChat];
 
-    div.onclick = () => {
+    allChats.unshift({
 
-        let chatBox =
-        document.getElementById("chatBox");
+        summary,
+        fullChat
 
-        chatBox.innerHTML = "";
+    });
 
-        currentChat.forEach(msg => {
-
-            let d =
-            document.createElement("div");
-
-            d.className =
-            msg.type;
-
-            d.innerHTML =
-            msg.text;
-
-            chatBox.appendChild(d);
-
-        });
-
-    };
-
-    historyList.prepend(div);
+    renderHistory();
 
 }
 
-async function send(){
+function renderHistory(){
 
-    let input =
+    const historyList =
+    document.getElementById("historyList");
+
+    historyList.innerHTML = "";
+
+    allChats.forEach(chat => {
+
+        const div =
+        document.createElement("div");
+
+        div.className =
+        "history-item";
+
+        div.innerText =
+        chat.summary;
+
+        div.onclick = () => {
+
+            const chatBox =
+            document.getElementById("chatBox");
+
+            chatBox.innerHTML = "";
+
+            chat.fullChat.forEach(msg => {
+
+                const d =
+                document.createElement("div");
+
+                d.className =
+                msg.role === "user"
+                ? "user"
+                : "ai";
+
+                d.innerHTML =
+                msg.content;
+
+                chatBox.appendChild(d);
+
+            });
+
+        };
+
+        historyList.appendChild(div);
+
+    });
+
+}
+
+async function send(customMessage = null){
+
+    const input =
     document.getElementById("userInput");
 
-    let msg =
-    input.value.trim();
+    const message =
+    customMessage || input.value.trim();
 
-    if(msg === "") return;
+    if(message === "") return;
 
     const intensity =
     document.getElementById("chatIntensity").value;
 
-    input.value = "";
+    if(!customMessage){
+        input.value = "";
+    }
 
-    let chatBox =
+    const chatBox =
     document.getElementById("chatBox");
 
-    let userDiv =
+    const userDiv =
     document.createElement("div");
 
     userDiv.className = "user";
 
-    userDiv.innerHTML =
-    `
-    ${msg}
-
-    <button class="edit-btn"
-    onclick="editMessage(this)">
-    ✏
-    </button>
+    userDiv.innerHTML = `
+        ${message}
+        <button class="edit-btn"
+        onclick="editMessage(this)">
+        ✏
+        </button>
     `;
 
     chatBox.appendChild(userDiv);
 
     currentChat.push({
-        type:"user",
-        text:userDiv.innerHTML
+
+        role:"user",
+        content:userDiv.innerHTML
+
     });
 
-    let aiDiv =
+    const aiDiv =
     document.createElement("div");
 
     aiDiv.className = "ai";
@@ -160,57 +203,51 @@ async function send(){
     chatBox.scrollTop =
     chatBox.scrollHeight;
 
-    const res = await fetch("/chat", {
+    try{
 
-        method:"POST",
+        const res =
+        await fetch("/chat", {
 
-        headers:{
-            "Content-Type":"application/json"
-        },
+            method:"POST",
 
-        body: JSON.stringify({
+            headers:{
+                "Content-Type":"application/json"
+            },
 
-            message: msg,
-            mood: mood,
-            intensity: intensity
+            body: JSON.stringify({
 
-        })
+                message: message,
+                mood: mood,
+                intensity: intensity
 
-    });
+            })
 
-    const data =
-    await res.json();
+        });
 
-    aiDiv.innerText =
-    data.reply;
+        const data =
+        await res.json();
 
-    currentChat.push({
-        type:"ai",
-        text:data.reply
-    });
+        aiDiv.innerText =
+        data.reply;
+
+        currentChat.push({
+
+            role:"assistant",
+            content:data.reply
+
+        });
+
+    }
+
+    catch{
+
+        aiDiv.innerText =
+        "CookedGPT broke emotionally 💀";
+
+    }
 
     chatBox.scrollTop =
     chatBox.scrollHeight;
-
-}
-
-function editMessage(button){
-
-    const parent =
-    button.parentElement;
-
-    const oldText =
-    parent.childNodes[0].textContent;
-
-    const newText =
-    prompt("Edit message", oldText);
-
-    if(newText){
-
-        parent.childNodes[0].textContent =
-        newText;
-
-    }
 
 }
 
@@ -220,12 +257,40 @@ async function newChat(){
 
     currentChat = [];
 
-    await fetch("/newchat", {
-        method:"POST"
-    });
-
     document.getElementById("chatBox")
     .innerHTML = "";
+
+    try{
+
+        await fetch("/newchat", {
+
+            method:"POST"
+
+        });
+
+    }
+
+    catch{}
+
+}
+
+function editMessage(button){
+
+    const parent =
+    button.parentElement;
+
+    const oldText =
+    parent.childNodes[0].textContent.trim();
+
+    const newText =
+    prompt("Edit your message", oldText);
+
+    if(!newText) return;
+
+    parent.childNodes[0].textContent =
+    newText + " ";
+
+    send(newText);
 
 }
 
