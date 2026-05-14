@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>CookedGPT</title>
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-href="{{ url_for('static', filename='style.css') }}">
+    <title>CookedGPT</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
@@ -16,44 +18,74 @@ href="{{ url_for('static', filename='style.css') }}">
 
 <div class="landing-page">
 
-    <div class="bg-animation"></div>
+    <div class="hero-content">
 
-    <img
-    src="{{ url_for('static', filename='cooker.png') }}"
-    class="main-cooker">
+        <div class="hero-main">
 
-    <h1>COOKEDGPT</h1>
+            <!-- LEFT -->
 
-    <p class="hero-text">
-        THE AI THAT DESTROYS YOUR EMOTIONAL STABILITY
-    </p>
+            <div class="hero-left">
 
-    <div class="feature-boxes">
+                <img
+                src="{{ url_for('static', filename='cooker.png') }}"
+                class="main-cooker">
 
-        <div class="feature-card">
-            <h2>STEP 1</h2>
-            <p>Select your chaos mood</p>
+            </div>
+
+            <!-- CENTER -->
+
+            <div class="hero-center">
+
+                <h1>COOKEDGPT</h1>
+
+                <p class="hero-text">
+                    THE AI THAT DESTROYS
+                    YOUR EMOTIONAL STABILITY
+                </p>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="hero-right">
+
+                <div class="feature-card">
+
+                    <h3>STEP 1</h3>
+
+                    <p>Select your chaos mood</p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <h3>STEP 2</h3>
+
+                    <p>Increase roast intensity</p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <h3>STEP 3</h3>
+
+                    <p>Get emotionally cooked</p>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="feature-card">
-            <h2>STEP 2</h2>
-            <p>Increase roast intensity</p>
-        </div>
+        <button
+        class="mind-btn"
+        onclick="window.location.href='/chatpage'">
 
-        <div class="feature-card">
-            <h2>STEP 3</h2>
-            <p>Get emotionally cooked</p>
-        </div>
+            OPEN YOUR MIND 🧠
+
+        </button>
 
     </div>
-
-    <button
-    class="mind-btn"
-    onclick="window.location.href='/chatpage'">
-
-    OPEN YOUR MIND 🧠
-
-    </button>
 
 </div>
 
