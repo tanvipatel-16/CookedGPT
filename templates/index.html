@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CookedGPT</title>
@@ -17,23 +15,24 @@
 
 <div class="hero">
 
+    <!-- BACKGROUND EFFECT -->
     <div class="hero-overlay"></div>
 
+    <!-- CYBER COOKER IMAGE -->
     <img
         src="{{ url_for('static', filename='cooker.png') }}"
         class="cooker"
     >
 
+    <!-- TITLE -->
     <h1>COOKEDGPT</h1>
 
     <p class="tagline">
         THE AI THAT ROASTS • COOKS • DESTROYS
     </p>
 
-    <button
-        class="enter-btn"
-        onclick="window.location.href='/chatpage'"
-    >
+    <!-- BUTTON -->
+    <button class="enter-btn" onclick="goNextPage()">
         OPEN YOUR MIND 🧠
     </button>
 
@@ -43,7 +42,11 @@
 
 </div>
 
+<script>
+function goNextPage() {
+    window.location.href = "/chatpage";
+}
+</script>
+
 </body>
 </html>
-
-      
