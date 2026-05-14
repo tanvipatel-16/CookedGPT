@@ -892,3 +892,313 @@ body{
     }
 }
 }
+/* FULL MOBILE FIX FOR ALL 3 PAGES */
+
+@media(max-width:768px){
+
+    body{
+
+        overflow-x:hidden;
+
+        overflow-y:auto;
+    }
+
+    /* PAGE 1 */
+
+    .landing-page{
+
+        min-height:auto;
+
+        padding:30px 20px 60px;
+
+        display:flex;
+
+        flex-direction:column;
+
+        justify-content:flex-start;
+
+        overflow-y:auto;
+    }
+
+    .hero-content{
+
+        width:100%;
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+    }
+
+    .main-cooker{
+
+        width:190px;
+
+        margin-top:20px;
+
+        margin-bottom:25px;
+    }
+
+    .landing-page h1{
+
+        font-size:38px;
+
+        line-height:1.1;
+
+        margin-bottom:15px;
+    }
+
+    .hero-text{
+
+        font-size:14px;
+
+        line-height:1.6;
+
+        margin-bottom:30px;
+
+        padding:0 10px;
+    }
+
+    .feature-boxes{
+
+        width:100%;
+
+        display:flex;
+
+        flex-direction:column;
+
+        gap:18px;
+
+        margin-bottom:35px;
+    }
+
+    .feature-card{
+
+        width:100%;
+
+        max-width:100%;
+
+        padding:20px;
+
+        border-radius:20px;
+    }
+
+    .mind-btn{
+
+        width:100%;
+
+        max-width:100%;
+
+        padding:16px;
+
+        font-size:16px;
+    }
+
+    /* PAGE 2 */
+
+    .mood-page{
+
+        min-height:auto;
+
+        padding:30px 15px 50px;
+
+        overflow-y:auto;
+    }
+
+    .mood-card{
+
+        width:100%;
+
+        max-width:100%;
+
+        padding:30px 20px;
+
+        border-radius:24px;
+    }
+
+    .mood-card h1{
+
+        font-size:30px;
+
+        margin-bottom:30px;
+    }
+
+    .moods{
+
+        display:flex;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        gap:12px;
+    }
+
+    .moods button{
+
+        width:100%;
+
+        padding:14px;
+
+        font-size:14px;
+    }
+
+    .intensity-area{
+
+        margin-top:25px;
+    }
+
+    .enter-chat-btn{
+
+        width:100%;
+
+        margin-top:30px;
+
+        padding:16px;
+    }
+
+    /* PAGE 3 */
+
+    .chat-page{
+
+        display:flex;
+
+        flex-direction:column;
+
+        min-height:100vh;
+
+        overflow-y:auto;
+    }
+
+    .sidebar{
+
+        width:100%;
+
+        height:auto;
+
+        padding:15px;
+
+        border-right:none;
+
+        border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    .sidebar h2{
+
+        font-size:24px;
+    }
+
+    .sidebar button{
+
+        width:100%;
+
+        padding:14px;
+
+        font-size:14px;
+    }
+
+    .history-item{
+
+        font-size:14px;
+
+        padding:12px;
+    }
+
+    .main-chat{
+
+        width:100%;
+
+        padding:10px;
+    }
+
+    .chat-topbar{
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+    }
+
+    #selectedMood{
+
+        width:100%;
+
+        text-align:center;
+
+        font-size:14px;
+    }
+
+    .top-intensity{
+
+        width:100%;
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:10px;
+    }
+
+    #chatIntensity{
+
+        width:100%;
+    }
+
+    #chatBox{
+
+        height:55vh;
+
+        padding:12px;
+
+        border-radius:16px;
+    }
+
+    .user,
+    .ai{
+
+        max-width:92%;
+
+        font-size:14px;
+
+        line-height:1.5;
+
+        padding:14px 16px;
+    }
+
+    .input-area{
+
+        width:100%;
+
+        margin-top:15px;
+
+        gap:8px;
+    }
+
+    #userInput{
+
+        width:100%;
+
+        padding:15px;
+
+        font-size:14px;
+
+        border-radius:40px;
+    }
+
+    .input-area button{
+
+        width:52px;
+
+        min-width:52px;
+
+        height:52px;
+
+        border-radius:50%;
+    }
+}
