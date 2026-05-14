@@ -1499,3 +1499,171 @@ body{
         padding:14px 16px;
     }
 }
+/* FIX FULLSCREEN LAPTOP LAYOUT */
+
+.landing-page{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+/* MAIN CONTAINER */
+
+.hero-content{
+
+    width:100%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+/* FIX HERO SECTION */
+
+.hero-main{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:50px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:50px;
+}
+
+/* LEFT */
+
+.hero-left{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+/* CENTER */
+
+.hero-center{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+}
+
+/* RIGHT */
+
+.hero-right{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+}
+
+/* BIG TITLE */
+
+.landing-page h1{
+
+    font-size:clamp(60px,8vw,140px);
+
+    line-height:1;
+
+    text-align:center;
+}
+
+/* SUBTITLE */
+
+.hero-text{
+
+    max-width:500px;
+
+    text-align:center;
+}
+
+/* STEP CARDS */
+
+.feature-card{
+
+    width:260px;
+}
+
+/* BUTTON */
+
+.mind-btn{
+
+    width:240px;
+
+    height:180px;
+
+    border-radius:40px;
+
+    font-size:34px;
+}
+
+/* LAPTOP PERFECT BALANCE */
+
+@media(min-width:1100px){
+
+    .hero-main{
+
+        flex-wrap:nowrap;
+    }
+}
+
+/* MOBILE STILL PERFECT */
+
+@media(max-width:768px){
+
+    .hero-main{
+
+        flex-direction:column;
+
+        gap:25px;
+    }
+
+    .hero-right{
+
+        width:100%;
+    }
+
+    .feature-card{
+
+        width:100%;
+    }
+
+    .mind-btn{
+
+        width:100%;
+
+        height:auto;
+
+        padding:20px;
+    }
+} 
