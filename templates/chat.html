@@ -1,13 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CookedGPT</title>
+    <title>CookedGPT Chat</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
@@ -17,225 +15,49 @@
 
 <div class="chat-container">
 
-    <!-- TOP -->
-
+    <!-- TOP BAR -->
     <div class="top-bar">
-
         <h1>COOKEDGPT</h1>
 
         <div id="currentMood">
-            😈 Savage Mode
+            Savage Mode
         </div>
-
     </div>
 
     <!-- MOODS -->
-
     <div class="moods">
 
-        <button class="mood-btn active" data-mood="savage">
-            😈 Savage
-        </button>
-
-        <button class="mood-btn" data-mood="delulu">
-            🎀 Delulu
-        </button>
-
-        <button class="mood-btn" data-mood="sigma">
-            🗿 Sigma
-        </button>
-
-        <button class="mood-btn" data-mood="clown">
-            🤡 Clown Check
-        </button>
-
-        <button class="mood-btn" data-mood="indian parents">
-            👨‍👩‍👧 Indian Parents
-        </button>
+        <button class="mood-btn active" data-mood="savage mode">😈 Savage</button>
+        <button class="mood-btn" data-mood="delulu">🎀 Delulu</button>
+        <button class="mood-btn" data-mood="sigma">🗿 Sigma</button>
+        <button class="mood-btn" data-mood="clowncheck">🤡 Clown Check</button>
+        <button class="mood-btn" data-mood="indian parents">👨‍👩‍👧 Indian Parents</button>
 
     </div>
 
     <!-- INTENSITY -->
-
     <div class="intensity-box">
+        <p>INTENSITY LEVEL</p>
 
-        <p>INTENSITY LEVEL ☠</p>
-
-        <input
-            type="range"
-            min="1"
-            max="10"
-            value="7"
-            id="intensity"
-        >
-
+        <input type="range" min="1" max="10" value="7" id="intensity">
     </div>
 
-    <!-- CHAT -->
-
+    <!-- CHAT BOX -->
     <div class="chat-box" id="chatBox"></div>
 
-    <!-- QUICK BUTTONS -->
-
-    <div class="quick-buttons">
-
-        <button onclick="quickMessage('Roast me harder')">
-            🔥 Roast me more
-        </button>
-
-        <button onclick="quickMessage('Give me advice')">
-            🎯 Give advice
-        </button>
-
-        <button onclick="quickMessage('Judge my life')">
-            💀 Judge me
-        </button>
-
-    </div>
-
     <!-- INPUT -->
-
     <div class="input-area">
 
-        <input
-            type="text"
-            id="userInput"
-            placeholder="Type your drama here..."
-        >
+        <input type="text" id="userInput" placeholder="Type your message...">
 
-        <button id="sendButton">
-            ➤
-        </button>
+        <button id="sendButton">➤</button>
 
     </div>
 
 </div>
 
-<script>
-
-let currentMood = "savage";
-
-const moodButtons = document.querySelectorAll(".mood-btn");
-
-const currentMoodText = document.getElementById("currentMood");
-
-moodButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        moodButtons.forEach(btn => btn.classList.remove("active"));
-
-        button.classList.add("active");
-
-        currentMood = button.dataset.mood;
-
-        currentMoodText.innerText =
-            button.innerText + " Mode";
-
-    });
-
-});
-
-function quickMessage(text){
-
-    document.getElementById("userInput").value = text;
-
-    sendMessage();
-
-}
-
-async function sendMessage(){
-
-    const input = document.getElementById("userInput");
-
-    const chatBox = document.getElementById("chatBox");
-
-    const intensity = document.getElementById("intensity").value;
-
-    const message = input.value.trim();
-
-    if(message === "") return;
-
-    // USER
-
-    const userMessage = document.createElement("div");
-
-    userMessage.classList.add("user-message");
-
-    userMessage.innerText = message;
-
-    chatBox.appendChild(userMessage);
-
-    input.value = "";
-
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-    // LOADING
-
-    const aiLoading = document.createElement("div");
-
-    aiLoading.classList.add("ai-message");
-
-    aiLoading.innerText = "Cooking response... 🔥";
-
-    chatBox.appendChild(aiLoading);
-
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-    try{
-
-        const response = await fetch("/chat", {
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify({
-
-                message:message,
-
-                mood:currentMood,
-
-                intensity:intensity
-
-            })
-
-        });
-
-        const data = await response.json();
-
-        aiLoading.innerText = data.reply;
-
-    }
-
-    catch(error){
-
-        aiLoading.innerText =
-            "CookedGPT had a mental breakdown 😭";
-
-    }
-
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-}
-
-document.getElementById("sendButton")
-.addEventListener("click", sendMessage);
-
-document.getElementById("userInput")
-.addEventListener("keypress", function(e){
-
-    if(e.key === "Enter"){
-
-        sendMessage();
-
-    }
-
-});
-
-</script>
+<!-- JS FILE -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
