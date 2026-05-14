@@ -14,7 +14,65 @@ href="{{ url_for('static', filename='style.css') }}">
 
 <body>
 
-<div class="chat-page">
+<!-- PAGE 2 -->
+
+<div class="mood-page" id="moodPage">
+
+    <div class="mood-card">
+
+        <h1>SELECT YOUR CHAOS</h1>
+
+        <div class="moods">
+
+            <button onclick="setMood('savage mode', this)">
+                😈 Savage
+            </button>
+
+            <button onclick="setMood('delulu', this)">
+                🎀 Delulu
+            </button>
+
+            <button onclick="setMood('sigma', this)">
+                🗿 Sigma
+            </button>
+
+            <button onclick="setMood('clowncheck', this)">
+                🤡 Clown
+            </button>
+
+            <button onclick="setMood('indian parents', this)">
+                👨‍👩‍👧 Parents
+            </button>
+
+        </div>
+
+        <div class="intensity-area">
+
+            <p>INTENSITY ☠</p>
+
+            <input
+            type="range"
+            min="1"
+            max="10"
+            value="5"
+            id="intensity">
+
+        </div>
+
+        <button class="enter-chat-btn"
+        onclick="openChat()">
+
+        ENTER CHAT
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="chat-page hidden" id="chatPage">
 
     <!-- SIDEBAR -->
 
@@ -33,9 +91,11 @@ href="{{ url_for('static', filename='style.css') }}">
         <div id="historyList"></div>
 
         <div class="login-box">
-            <button>
+
+            <button onclick="fakeLogin()">
                 Login
             </button>
+
         </div>
 
     </div>
@@ -44,54 +104,31 @@ href="{{ url_for('static', filename='style.css') }}">
 
     <div class="main-chat">
 
-        <!-- TOP -->
+        <div class="chat-topbar">
 
-        <div class="top-section">
-
-            <div class="moods">
-
-                <button onclick="setMood('savage mode')">
-                    😈 Savage
-                </button>
-
-                <button onclick="setMood('delulu')">
-                    🎀 Delulu
-                </button>
-
-                <button onclick="setMood('sigma')">
-                    🗿 Sigma
-                </button>
-
-                <button onclick="setMood('clowncheck')">
-                    🤡 Clown
-                </button>
-
-                <button onclick="setMood('indian parents')">
-                    👨‍👩‍👧 Parents
-                </button>
-
+            <div id="selectedMood">
+                😈 Savage Mode
             </div>
 
-            <div class="intensity-box">
+            <div class="top-intensity">
 
-                <span>INTENSITY ☠</span>
+                <span id="intensityValue">
+                    Intensity: 5
+                </span>
 
                 <input
                 type="range"
                 min="1"
                 max="10"
                 value="5"
-                id="intensity">
+                id="chatIntensity"
+                onchange="syncIntensity(this.value)">
 
             </div>
 
         </div>
 
-        <!-- CHAT -->
-
         <div id="chatBox"></div>
-
-        <!-- INPUT -->
 
         <div class="input-area">
 
