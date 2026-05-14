@@ -1,63 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>CookedGPT Chat</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-
 <body>
 
 <div class="chat-container">
 
-    <!-- TOP BAR -->
-    <div class="top-bar">
-        <h1>COOKEDGPT</h1>
-
-        <div id="currentMood">
-            Savage Mode
-        </div>
-    </div>
-
-    <!-- MOODS -->
     <div class="moods">
-
-        <button class="mood-btn active" data-mood="savage mode">😈 Savage</button>
-        <button class="mood-btn" data-mood="delulu">🎀 Delulu</button>
-        <button class="mood-btn" data-mood="sigma">🗿 Sigma</button>
-        <button class="mood-btn" data-mood="clowncheck">🤡 Clown Check</button>
-        <button class="mood-btn" data-mood="indian parents">👨‍👩‍👧 Indian Parents</button>
-
+        <button onclick="setMood('savage mode')">Savage</button>
+        <button onclick="setMood('delulu')">Delulu</button>
+        <button onclick="setMood('sigma')">Sigma</button>
+        <button onclick="setMood('clowncheck')">Clown</button>
+        <button onclick="setMood('indian parents')">Parents</button>
     </div>
 
-    <!-- INTENSITY -->
-    <div class="intensity-box">
-        <p>INTENSITY LEVEL</p>
+    <input type="range" min="1" max="10" value="5" id="intensity">
 
-        <input type="range" min="1" max="10" value="7" id="intensity">
-    </div>
+    <div id="chatBox"></div>
 
-    <!-- CHAT BOX -->
-    <div class="chat-box" id="chatBox"></div>
-
-    <!-- INPUT -->
     <div class="input-area">
-
-        <input type="text" id="userInput" placeholder="Type your message...">
-
-        <button id="sendButton">➤</button>
-
+        <input id="userInput" placeholder="Type...">
+        <button onclick="send()">➤</button>
     </div>
+
+    <button onclick="newChat()">New Chat</button>
 
 </div>
 
-<!-- JS FILE -->
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="/static/script.js"></script>
 
 </body>
 </html>
