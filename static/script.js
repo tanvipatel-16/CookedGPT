@@ -1,114 +1,99 @@
+let currentMood = "savage mode";
 
-const mindButton = document.getElementById("mindButton");
+// 🎭 MOOD SELECTOR
+const moodButtons = document.querySelectorAll(".mood-btn");
+const currentMoodText = document.getElementById("currentMood");
 
-if(mindButton){
+moodButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
 
-    mindButton.addEventListener("click", () => {
+        moodButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
 
-        localStorage.setItem("mood", "Savage");
+        currentMood = btn.dataset.mood;
 
-        window.location.href = "/chatpage";
-
+        if (currentMoodText) {
+            currentMoodText.innerText = btn.innerText + " Mode";
+        }
     });
+});
 
+
+// 🚀 QUICK MESSAGE
+function quickMessage(text) {
+    document.getElementById("userInput").value = text;
+    sendMessage();
 }
 
-// CHAT
 
-const sendButton = document.getElementById("sendButton");
+// 🤖 SEND MESSAGE
+async function sendMessage() {
 
-if(sendButton){
+    const input = document.getElementById("userInput");
+    const chatBox = document.getElementById("chatBox");
+    const intensity = document.getElementById("intensity");
 
-    const userInput =
-        document.getElementById("userInput");
+    if (!input || !chatBox) return;
 
-    const chatBox =
-        document.getElementById("chatBox");
+    const message = input.value.trim();
+    if (message === "") return;
 
-    const currentMood =
-        localStorage.getItem("mood") || "Savage";
+    // USER MESSAGE
+    const userDiv = document.createElement("div");
+    userDiv.className = "user-message";
+    userDiv.innerText = message;
+    chatBox.appendChild(userDiv);
 
-    document.getElementById("currentMood")
-        .innerText = currentMood;
+    input.value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
 
-    async function sendMessage(){
+    // LOADING
+    const aiDiv = document.createElement("div");
+    aiDiv.className = "ai-message";
+    aiDiv.innerText = "Cooking response... 🔥";
+    chatBox.appendChild(aiDiv);
 
-        const message = userInput.value.trim();
+    chatBox.scrollTop = chatBox.scrollHeight;
 
-        if(message === "") return;
-
-        // USER
-
-        const userDiv =
-            document.createElement("div");
-
-        userDiv.className = "user-message";
-
-        userDiv.innerText = message;
-
-        chatBox.appendChild(userDiv);
-
-        userInput.value = "";
-
-        // AI
-
-        const aiDiv =
-            document.createElement("div");
-
-        aiDiv.className = "ai-message";
-
-        aiDiv.innerText =
-            "Cooking response...";
-
-        chatBox.appendChild(aiDiv);
-
-        chatBox.scrollTop =
-            chatBox.scrollHeight;
-
+    try {
         const res = await fetch("/chat", {
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-
             body: JSON.stringify({
-
                 message: message,
                 mood: currentMood,
-                intensity: 50
-
+                intensity: intensity ? intensity.value : 5
             })
-
         });
 
         const data = await res.json();
-
         aiDiv.innerText = data.reply;
 
-        chatBox.scrollTop =
-            chatBox.scrollHeight;
-
+    } catch (error) {
+        aiDiv.innerText = "CookedGPT crashed 💀";
     }
 
-    sendButton.addEventListener(
-        "click",
-        sendMessage
-    );
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
 
-    userInput.addEventListener(
-        "keydown",
-        (e) => {
 
-            if(e.key === "Enter"){
+// 📩 EVENTS
+document.addEventListener("DOMContentLoaded", () => {
+
+    const sendBtn = document.getElementById("sendButton");
+    const input = document.getElementById("userInput");
+
+    if (sendBtn) {
+        sendBtn.addEventListener("click", sendMessage);
+    }
+
+    if (input) {
+        input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
                 sendMessage();
             }
-
-        }
-    );
-
-
-
-     
-           
+        });
+    }
+});
