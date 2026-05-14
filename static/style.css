@@ -1667,3 +1667,46 @@ body{
         padding:20px;
     }
 } 
+/* LOGIN UI */
+
+.login-box{
+
+    margin-top:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+#userCircle{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    background:
+    linear-gradient(45deg,#c44dff,#7d2cff);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    margin:auto;
+
+    box-shadow:0 0 20px #a020f0;
+}
+
+.login-box button{
+
+    width:100%;
+}
