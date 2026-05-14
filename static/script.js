@@ -1,99 +1,40 @@
-let currentMood = "savage mode";
+let mood = "savage mode";
 
-// 🎭 MOOD SELECTOR
-const moodButtons = document.querySelectorAll(".mood-btn");
-const currentMoodText = document.getElementById("currentMood");
-
-moodButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-
-        moodButtons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        currentMood = btn.dataset.mood;
-
-        if (currentMoodText) {
-            currentMoodText.innerText = btn.innerText + " Mode";
-        }
-    });
-});
-
-
-// 🚀 QUICK MESSAGE
-function quickMessage(text) {
-    document.getElementById("userInput").value = text;
-    sendMessage();
+function setMood(m){
+    mood = m;
 }
 
+async function send(){
 
-// 🤖 SEND MESSAGE
-async function sendMessage() {
+    let input = document.getElementById("userInput");
+    let msg = input.value;
 
-    const input = document.getElementById("userInput");
-    const chatBox = document.getElementById("chatBox");
-    const intensity = document.getElementById("intensity");
+    if(msg === "") return;
 
-    if (!input || !chatBox) return;
-
-    const message = input.value.trim();
-    if (message === "") return;
-
-    // USER MESSAGE
-    const userDiv = document.createElement("div");
-    userDiv.className = "user-message";
-    userDiv.innerText = message;
-    chatBox.appendChild(userDiv);
+    let intensity = document.getElementById("intensity").value;
 
     input.value = "";
-    chatBox.scrollTop = chatBox.scrollHeight;
 
-    // LOADING
-    const aiDiv = document.createElement("div");
-    aiDiv.className = "ai-message";
-    aiDiv.innerText = "Cooking response... 🔥";
-    chatBox.appendChild(aiDiv);
+    let chatBox = document.getElementById("chatBox");
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+    chatBox.innerHTML += `<div class="user">You: ${msg}</div>`;
 
-    try {
-        const res = await fetch("/chat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: message,
-                mood: currentMood,
-                intensity: intensity ? intensity.value : 5
-            })
-        });
+    let res = await fetch("/chat", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+            message: msg,
+            mood: mood,
+            intensity: intensity
+        })
+    });
 
-        const data = await res.json();
-        aiDiv.innerText = data.reply;
+    let data = await res.json();
 
-    } catch (error) {
-        aiDiv.innerText = "CookedGPT crashed 💀";
-    }
-
-    chatBox.scrollTop = chatBox.scrollHeight;
+    chatBox.innerHTML += `<div class="ai">AI: ${data.reply}</div>`;
 }
 
-
-// 📩 EVENTS
-document.addEventListener("DOMContentLoaded", () => {
-
-    const sendBtn = document.getElementById("sendButton");
-    const input = document.getElementById("userInput");
-
-    if (sendBtn) {
-        sendBtn.addEventListener("click", sendMessage);
-    }
-
-    if (input) {
-        input.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") {
-                sendMessage();
-            }
-        });
-    }
-});
+async function newChat(){
+    await fetch("/newchat", {method:"POST"});
+    document.getElementById("chatBox").innerHTML = "";
+}
