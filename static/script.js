@@ -1,22 +1,107 @@
 let mood = "savage mode";
 
+let currentChat = [];
+
 const historyList =
 document.getElementById("historyList");
 
-function setMood(m){
+function setMood(m, btn){
 
     mood = m;
 
+    document.querySelectorAll(".moods button")
+    .forEach(b => b.classList.remove("activeMood"));
+
+    btn.classList.add("activeMood");
+
 }
 
-function saveHistory(text){
+function openChat(){
+
+    document.getElementById("moodPage")
+    .classList.add("page-exit");
+
+    setTimeout(() => {
+
+        document.getElementById("moodPage")
+        .style.display = "none";
+
+        document.getElementById("chatPage")
+        .classList.remove("hidden");
+
+        document.getElementById("chatPage")
+        .classList.add("page-enter");
+
+    }, 700);
+
+    document.getElementById("selectedMood")
+    .innerText =
+    "🔥 " + mood.toUpperCase();
+
+    const intensity =
+    document.getElementById("intensity").value;
+
+    document.getElementById("chatIntensity")
+    .value = intensity;
+
+    document.getElementById("intensityValue")
+    .innerText =
+    "Intensity: " + intensity;
+
+}
+
+function syncIntensity(value){
+
+    document.getElementById("intensityValue")
+    .innerText =
+    "Intensity: " + value;
+
+}
+
+function fakeLogin(){
+
+    alert("Login system coming soon 🚀");
+
+}
+
+function saveConversationSummary(){
+
+    if(currentChat.length === 0) return;
+
+    const firstMessage =
+    currentChat[0];
 
     const div =
     document.createElement("div");
 
     div.className = "history-item";
 
-    div.innerText = text;
+    div.innerText =
+    firstMessage.slice(0, 35) + "...";
+
+    div.onclick = () => {
+
+        let chatBox =
+        document.getElementById("chatBox");
+
+        chatBox.innerHTML = "";
+
+        currentChat.forEach(msg => {
+
+            let d =
+            document.createElement("div");
+
+            d.className =
+            msg.type;
+
+            d.innerHTML =
+            msg.text;
+
+            chatBox.appendChild(d);
+
+        });
+
+    };
 
     historyList.prepend(div);
 
@@ -27,12 +112,13 @@ async function send(){
     let input =
     document.getElementById("userInput");
 
-    let msg = input.value;
+    let msg =
+    input.value.trim();
 
     if(msg === "") return;
 
-    let intensity =
-    document.getElementById("intensity").value;
+    const intensity =
+    document.getElementById("chatIntensity").value;
 
     input.value = "";
 
@@ -47,6 +133,7 @@ async function send(){
     userDiv.innerHTML =
     `
     ${msg}
+
     <button class="edit-btn"
     onclick="editMessage(this)">
     ✏
@@ -54,6 +141,11 @@ async function send(){
     `;
 
     chatBox.appendChild(userDiv);
+
+    currentChat.push({
+        type:"user",
+        text:userDiv.innerHTML
+    });
 
     let aiDiv =
     document.createElement("div");
@@ -86,11 +178,16 @@ async function send(){
 
     });
 
-    const data = await res.json();
+    const data =
+    await res.json();
 
-    aiDiv.innerText = data.reply;
+    aiDiv.innerText =
+    data.reply;
 
-    saveHistory(msg);
+    currentChat.push({
+        type:"ai",
+        text:data.reply
+    });
 
     chatBox.scrollTop =
     chatBox.scrollHeight;
@@ -118,6 +215,10 @@ function editMessage(button){
 }
 
 async function newChat(){
+
+    saveConversationSummary();
+
+    currentChat = [];
 
     await fetch("/newchat", {
         method:"POST"
