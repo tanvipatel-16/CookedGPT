@@ -81,8 +81,24 @@ href="{{ url_for('static', filename='style.css') }}">
         <h2>COOKEDGPT</h2>
 
         <button onclick="newChat()">
-            + New Chat
-        </button>
+    + New Chat
+</button>
+
+<div class="login-box">
+
+    <div id="userCircle">
+        👤
+    </div>
+
+    <button onclick="openAuth()">
+        Login / Signup
+    </button>
+
+    <button onclick="logoutUser()">
+        Logout
+    </button>
+
+</div>
 
         <div class="history-title">
             PREVIOUS CHATS
