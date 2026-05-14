@@ -305,3 +305,66 @@ document
     }
 
 });
+async function openAuth(){
+
+    const email =
+    prompt("Enter Email");
+
+    if(!email) return;
+
+    const password =
+    prompt("Enter Password");
+
+    if(!password) return;
+
+    const choice =
+    confirm("Press OK for Signup\nPress Cancel for Login");
+
+    let endpoint = "/login";
+
+    if(choice){
+        endpoint = "/signup";
+    }
+
+    const res = await fetch(endpoint, {
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body: JSON.stringify({
+
+            email,
+            password
+
+        })
+
+    });
+
+    const data = await res.json();
+
+    if(data.success){
+
+        document.getElementById("userCircle")
+        .innerText =
+        email[0].toUpperCase();
+
+        alert("Welcome 🚀");
+
+    }
+
+    else{
+
+        alert(data.message);
+
+    }
+
+}
+
+function logoutUser(){
+
+    window.location.href = "/logout";
+
+}
