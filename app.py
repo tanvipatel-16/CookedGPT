@@ -11,9 +11,15 @@ client = Groq(
 
 chat_history = []
 
+def reset_history_if_needed():
+    global chat_history
+    if len(chat_history) > 20:
+        chat_history = chat_history[-20:]
+
+
 system_prompts = {
 
-    "savage": """
+    "savage mode": """
     You are CookedGPT.
 
     Roast the user in a savage Gen Z way.
@@ -38,7 +44,7 @@ system_prompts = {
     Short powerful replies only.
     """,
 
-    "clown": """
+    "clowncheck": """
     You are CookedGPT.
 
     Expose the user's clown behavior.
@@ -76,6 +82,7 @@ def chatpage():
 
 @app.route("/chat", methods=["POST"])
 def chat():
+        reset_history_if_needed()
 
     data = request.get_json()
 
@@ -83,7 +90,7 @@ def chat():
     mood = data["mood"]
     intensity = data["intensity"]
 
-    system_prompt = system_prompts.get(mood, system_prompts["savage"])
+    system_prompt = system_prompts.get(mood.lower(), system_prompts["savage mode"])
 
     chat_history.append({
         "role": "user",
