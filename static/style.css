@@ -837,4 +837,58 @@ body{
 
         font-size:14px;
     }
+    @media(max-width:768px){
+
+    .sidebar{
+
+        padding:12px;
+    }
+
+    .sidebar button{
+
+        width:100%;
+
+        font-size:14px;
+    }
+
+    .main-chat{
+
+        padding:8px;
+    }
+
+    #chatBox{
+
+        height:50vh;
+    }
+
+    .input-area{
+
+        width:100%;
+    }
+
+    #userInput{
+
+        width:100%;
+    }
+
+    .mood-card{
+
+        width:95%;
+    }
+
+    .feature-card{
+
+        width:95%;
+    }
+
+    .landing-page h1{
+
+        font-size:34px;
+    }
+
+    .main-cooker{
+
+        width:180px;
+    }
+}
 }
