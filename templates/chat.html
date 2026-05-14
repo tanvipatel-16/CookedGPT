@@ -1,35 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CookedGPT Chat</title>
-    <link rel="stylesheet" href="/static/style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CookedGPT</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
 </head>
+
 <body>
 
-<div class="chat-container">
+<div class="chat-page">
 
-    <div class="moods">
-        <button onclick="setMood('savage mode')">Savage</button>
-        <button onclick="setMood('delulu')">Delulu</button>
-        <button onclick="setMood('sigma')">Sigma</button>
-        <button onclick="setMood('clowncheck')">Clown</button>
-        <button onclick="setMood('indian parents')">Parents</button>
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h2>COOKEDGPT</h2>
+
+        <button onclick="newChat()">
+            + New Chat
+        </button>
+
+        <div class="history-title">
+            PREVIOUS CHATS
+        </div>
+
+        <div id="historyList"></div>
+
+        <div class="login-box">
+            <button>
+                Login
+            </button>
+        </div>
+
     </div>
 
-    <input type="range" min="1" max="10" value="5" id="intensity">
+    <!-- MAIN -->
 
-    <div id="chatBox"></div>
+    <div class="main-chat">
 
-    <div class="input-area">
-        <input id="userInput" placeholder="Type...">
-        <button onclick="send()">➤</button>
+        <!-- TOP -->
+
+        <div class="top-section">
+
+            <div class="moods">
+
+                <button onclick="setMood('savage mode')">
+                    😈 Savage
+                </button>
+
+                <button onclick="setMood('delulu')">
+                    🎀 Delulu
+                </button>
+
+                <button onclick="setMood('sigma')">
+                    🗿 Sigma
+                </button>
+
+                <button onclick="setMood('clowncheck')">
+                    🤡 Clown
+                </button>
+
+                <button onclick="setMood('indian parents')">
+                    👨‍👩‍👧 Parents
+                </button>
+
+            </div>
+
+            <div class="intensity-box">
+
+                <span>INTENSITY ☠</span>
+
+                <input
+                type="range"
+                min="1"
+                max="10"
+                value="5"
+                id="intensity">
+
+            </div>
+
+        </div>
+
+        <!-- CHAT -->
+
+        <div id="chatBox"></div>
+
+        <!-- INPUT -->
+
+        <div class="input-area">
+
+            <input
+            id="userInput"
+            placeholder="Type your drama here...">
+
+            <button onclick="send()">
+                ➤
+            </button>
+
+        </div>
+
     </div>
-
-    <button onclick="newChat()">New Chat</button>
 
 </div>
 
-<script src="/static/script.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
