@@ -1,8 +1,10 @@
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect
 from groq import Groq
 
 app = Flask(__name__)
+
+app.secret_key = "cookedgptsecret"
 
 client = Groq(api_key=os.environ.get("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"))
 
@@ -21,6 +23,58 @@ system_prompts = {
     "clowncheck": "You roast clown behavior in a funny sarcastic way.",
     "indian parents": "You are strict funny Indian parents with emotional drama."
 }
+users = {}
+
+@app.route("/signup", methods=["POST"])
+def signup():
+
+    data = request.get_json()
+
+    email = data["email"]
+    password = data["password"]
+
+    if email in users:
+
+        return jsonify({
+            "success": False,
+            "message": "User already exists"
+        })
+
+    users[email] = password
+
+    session["user"] = email
+
+    return jsonify({
+        "success": True
+    })
+
+@app.route("/login", methods=["POST"])
+def login():
+
+    data = request.get_json()
+
+    email = data["email"]
+    password = data["password"]
+
+    if email in users and users[email] == password:
+
+        session["user"] = email
+
+        return jsonify({
+            "success": True
+        })
+
+    return jsonify({
+        "success": False,
+        "message": "Invalid credentials"
+    })
+
+@app.route("/logout")
+def logout():
+
+    session.pop("user", None)
+
+    return redirect("/")
 
 
 @app.route("/")
