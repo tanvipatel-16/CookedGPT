@@ -1,21 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CookedGPT</title>
-    <link rel="stylesheet" href="/static/style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CookedGPT</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
 </head>
+
 <body>
 
-<div class="hero">
+<div class="landing-page">
 
-    <img src="/static/cooker.png" class="cooker">
+    <div class="bg-animation"></div>
+
+    <img
+    src="{{ url_for('static', filename='cooker.png') }}"
+    class="main-cooker">
 
     <h1>COOKEDGPT</h1>
 
-    <p>AI THAT ROASTS YOU INTO CHARACTER DEVELOPMENT</p>
+    <p class="hero-text">
+        THE AI THAT DESTROYS YOUR EMOTIONAL STABILITY
+    </p>
 
-    <button onclick="window.location.href='/chatpage'">
-        OPEN YOUR MIND
+    <div class="feature-boxes">
+
+        <div class="feature-card">
+            <h2>STEP 1</h2>
+            <p>Select your chaos mood</p>
+        </div>
+
+        <div class="feature-card">
+            <h2>STEP 2</h2>
+            <p>Increase roast intensity</p>
+        </div>
+
+        <div class="feature-card">
+            <h2>STEP 3</h2>
+            <p>Get emotionally cooked</p>
+        </div>
+
+    </div>
+
+    <button
+    class="mind-btn"
+    onclick="window.location.href='/chatpage'">
+
+    OPEN YOUR MIND 🧠
+
     </button>
 
 </div>
