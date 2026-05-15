@@ -408,3 +408,13 @@ body{
   }
 
 }
+/* REGENERATE BUTTON */
+
+.regen-btn{
+  margin-top:15px;
+  background:none;
+  border:none;
+  color:#d946ef;
+  cursor:pointer;
+  font-size:14px;
+}
