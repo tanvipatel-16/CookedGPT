@@ -27,13 +27,12 @@ def chat_message():
     mood = data.get('mood', 'demonic')
     intensity = data.get('intensity', 7)
 
-    # System prompt to force longer, more detailed roasts
-    system_prompt = (
-        f"You are the {mood} AI persona from CookedGPT. Roast intensity: {intensity}/10. "
-        "STRICT RULE: Never give short or one-sentence replies. "
-        "Write 3-4 long, savage, and detailed paragraphs. "
-        "Analyze the user's flaws deeply. Use multiple paragraphs to destroy them."
-    )
+  # System prompt for Groq/Llama
+system_prompt = (
+    f"You are the {mood} persona. Heat: {intensity}/10. "
+    "MANDATORY: Give a long, savage, 3-paragraph roast. "
+    "Do not be polite. Use the chat history to attack their previous messages."
+)
 
     api_messages = [{"role": "system", "content": system_prompt}]
     for msg in history:
