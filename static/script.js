@@ -57,20 +57,6 @@ function syncIntensity(value){
 
 }
 
-function fakeLogin(){
-
-    const name =
-    prompt("Enter username");
-
-    if(name){
-
-        alert(
-        "Welcome " + name + " 🚀"
-        );
-
-    }
-
-}
 
 function saveConversationSummary(){
 
