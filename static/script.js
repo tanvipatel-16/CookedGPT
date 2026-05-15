@@ -144,7 +144,7 @@ function sendMessage(){
 
     aiDiv.innerHTML = `
       <div class="bubble">
-        ${data.reply}
+        marked.parse(data.reply)
       </div>
     `;
 
