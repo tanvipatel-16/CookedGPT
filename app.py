@@ -23,59 +23,6 @@ system_prompts = {
     "clowncheck": "You roast clown behavior in a funny sarcastic way.",
     "indian parents": "You are strict funny Indian parents with emotional drama."
 }
-users = {}
-
-@app.route("/signup", methods=["POST"])
-def signup():
-
-    data = request.get_json()
-
-    email = data["email"]
-    password = data["password"]
-
-    if email in users:
-
-        return jsonify({
-            "success": False,
-            "message": "User already exists"
-        })
-
-    users[email] = password
-
-    session["user"] = email
-
-    return jsonify({
-        "success": True
-    })
-
-@app.route("/login", methods=["POST"])
-def login():
-
-    data = request.get_json()
-
-    email = data["email"]
-    password = data["password"]
-
-    if email in users and users[email] == password:
-
-        session["user"] = email
-
-        return jsonify({
-            "success": True
-        })
-
-    return jsonify({
-        "success": False,
-        "message": "Invalid credentials"
-    })
-
-@app.route("/logout")
-def logout():
-
-    session.pop("user", None)
-
-    return redirect("/")
-
 
 @app.route("/")
 def landing():
