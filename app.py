@@ -4,8 +4,10 @@ import os
 
 app = Flask(__name__)
 
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
 client = Groq(
-    api_key=os.environ.get("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")
+    api_key=GROQ_API_KEY
 )
 
 # LANDING PAGE
@@ -67,14 +69,14 @@ def chat():
         return jsonify({
             "reply": reply
         })
+  except Exception as e:
 
-    except Exception as e:
+    print("ERROR:", e)
 
-        print(e)
-
-        return jsonify({
-            "reply": "CookedGPT is emotionally unavailable right now."
-        })
+    return jsonify({
+        "reply": str(e)
+    })
+   
 
 if __name__ == "__main__":
     app.run(debug=True)
