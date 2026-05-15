@@ -1158,3 +1158,69 @@ a { text-decoration: none; color: inherit; }
   .chat-messages { padding: 1.5rem 1.5rem; }
   .chat-input-area { padding: 0.8rem 1.5rem 0.5rem; }
 }
+/* ───────── MOBILE FIXES ───────── */
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    padding: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .hero,
+  .moods-section,
+  .manifesto,
+  .page-header,
+  .personality-panel,
+  .footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .moods-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .mood-card {
+    min-height: 260px;
+  }
+
+  .card-emoji {
+    font-size: 4rem;
+  }
+
+  .personality-panel {
+    margin: 1rem;
+    padding: 1.2rem;
+  }
+
+  .panel-top {
+    flex-direction: column;
+  }
+
+  .intensity-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-begin {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .chat-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+}
