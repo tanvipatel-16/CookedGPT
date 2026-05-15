@@ -1,53 +1,62 @@
-import os
 from flask import Flask, render_template, request, jsonify
 from groq import Groq
+import os
 
 app = Flask(__name__)
 
-# Initialize Groq Client
-# Tip: On Render, use Environment Variables for your key
-client = Groq(api_key="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")
+# GROQ API KEY
+client = Groq(
+    api_key=os.environ.get("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")
+)
 
-@app.route('/')
-def landing():
-    return render_template('landing.html')
+# Home Page
+@app.route("/")
+def home():
+    return render_template("chat.html")
 
-@app.route('/moods')
-def moods():
-    return render_template('index.html')
-
-@app.route('/chat')
+# Chat API
+@app.route("/chat", methods=["POST"])
 def chat():
-    return render_template('chat.html')
 
-@app.route('/chat_message', methods=['POST'])
-def chat_message():
-    data = request.json
-    history = data.get('messages', [])
-    mood = data.get('mood', 'demonic')
-    intensity = data.get('intensity', 7)
+    data = request.get_json()
 
-    system_prompt = (
-        f"You are the {mood} AI persona from CookedGPT. Intensity: {intensity}/10. "
-        "MANDATORY: Provide a savage, multi-paragraph roast. "
-        "Never give short replies. Use the chat history to stay relevant and brutal."
-    )
-
-    api_messages = [{"role": "system", "content": system_prompt}]
-    for msg in history:
-        api_messages.append(msg)
+    user_message = data.get("message")
 
     try:
-        completion = client.chat.completions.create(
-            model="llama-3.1-70b-versatile",
-            messages=api_messages,
-            max_tokens=800,
-            temperature=0.9
-        )
-        reply = completion.choices[0].message.content
-        return jsonify({"reply": reply})
-    except Exception as e:
-        return jsonify({"reply": "The server melted from that roast."}), 500
 
-if __name__ == '__main__':
+        completion = client.chat.completions.create(
+            model="llama3-8b-8192",
+
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are CookedGPT, a smart futuristic AI assistant."
+                },
+
+                {
+                    "role": "user",
+                    "content": user_message
+                }
+            ],
+
+            temperature=0.7,
+            max_tokens=1024
+        )
+
+        ai_reply = completion.choices[0].message.content
+
+        return jsonify({
+            "reply": ai_reply
+        })
+
+    except Exception as e:
+
+        print(e)
+
+        return jsonify({
+            "reply": "Error connecting to AI."
+        })
+
+# Run App
+if __name__ == "__main__":
     app.run(debug=True)
