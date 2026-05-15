@@ -1,420 +1,315 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap');
+/* MOODS */
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Inter',sans-serif;
+let selectedMood = "Savage";
+
+const moodCards = document.querySelectorAll(".mood-card");
+
+moodCards.forEach(card => {
+
+  card.addEventListener("click", () => {
+
+    moodCards.forEach(c => c.classList.remove("active"));
+
+    card.classList.add("active");
+
+    selectedMood = card.dataset.mood;
+
+  });
+
+});
+
+/* START */
+
+const startBtn = document.getElementById("startCooking");
+
+if(startBtn){
+
+  startBtn.addEventListener("click", () => {
+
+    localStorage.setItem("mood", selectedMood);
+
+    window.location.href = "/chatpage";
+
+  });
+
 }
 
-body{
-  background:#020205;
-  color:white;
-  overflow-x:hidden;
-}
+/* MOBILE SIDEBAR */
 
-/* BACKGROUND */
+const menuBtn = document.getElementById("menuBtn");
 
-.bg-glow{
-  position:fixed;
-  width:700px;
-  height:700px;
-  background:radial-gradient(circle,#9333ea 0%,transparent 70%);
-  opacity:0.25;
-  filter:blur(100px);
-  top:100px;
-  left:-150px;
-  z-index:-1;
-}
+const sidebar = document.getElementById("sidebar");
 
-/* NAVBAR */
+if(menuBtn){
 
-.navbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:30px 70px;
-}
+  menuBtn.addEventListener("click", () => {
 
-.logo{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
+    sidebar.classList.toggle("show");
 
-.logo-box{
-  width:52px;
-  height:52px;
-  border-radius:16px;
-  background:#160d21;
-  border:1px solid #9333ea;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 0 30px #9333ea;
-}
+  });
 
-.logo span{
-  font-weight:800;
-  font-size:24px;
-}
-
-.nav-links{
-  display:flex;
-  gap:40px;
-}
-
-.nav-links a{
-  text-decoration:none;
-  color:#a1a1aa;
-}
-
-.launch-btn{
-  text-decoration:none;
-  color:white;
-  border:1px solid #9333ea;
-  padding:14px 28px;
-  border-radius:50px;
-}
-
-/* HERO */
-
-.hero{
-  min-height:85vh;
-  display:grid;
-  grid-template-columns:1fr 1.2fr;
-  align-items:center;
-  gap:50px;
-  padding:40px 70px;
-}
-
-.hero-left img{
-  width:100%;
-  border-radius:30px;
-}
-
-.badge{
-  display:inline-block;
-  padding:12px 25px;
-  border-radius:30px;
-  background:#120d18;
-  border:1px solid rgba(255,255,255,0.08);
-  color:#d8b4fe;
-}
-
-.hero-center h1{
-  font-size:100px;
-  margin-top:30px;
-  background:linear-gradient(to right,#fff,#d946ef);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.hero-center h2{
-  margin-top:20px;
-  line-height:1.5;
-  color:#d1d5db;
-}
-
-.hero-center h2 span{
-  color:#e879f9;
-}
-
-.hero-center p{
-  margin-top:25px;
-  color:#9ca3af;
-  line-height:1.8;
-}
-
-.main-btn{
-  display:inline-block;
-  margin-top:35px;
-  background:linear-gradient(to right,#9333ea,#ec4899);
-  padding:18px 40px;
-  border-radius:60px;
-  color:white;
-  text-decoration:none;
-}
-
-/* SETUP */
-
-.setup-container{
-  min-height:100vh;
-  padding:60px 30px;
-  max-width:1200px;
-  margin:auto;
-  text-align:center;
-}
-
-.setup-container h1{
-  font-size:60px;
-  margin-bottom:50px;
-}
-
-.moods{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:25px;
-}
-
-.mood-card{
-  background:#0f0b17;
-  padding:40px 25px;
-  border-radius:30px;
-  border:1px solid rgba(255,255,255,0.08);
-  cursor:pointer;
-  transition:0.3s;
-  font-size:24px;
-}
-
-.mood-card:hover{
-  transform:translateY(-5px);
-}
-
-.mood-card.active{
-  border:1px solid #d946ef;
-  box-shadow:0 0 30px rgba(217,70,239,0.4);
-}
-
-.slider-box{
-  margin-top:50px;
-}
-
-.slider-box input{
-  width:100%;
-  margin-top:20px;
-}
-
-#startCooking{
-  margin-top:50px;
-  padding:20px 40px;
-  border:none;
-  border-radius:60px;
-  background:linear-gradient(to right,#9333ea,#ec4899);
-  color:white;
-  font-size:18px;
-  cursor:pointer;
 }
 
 /* CHAT */
 
-.chat-app{
-  display:flex;
-  height:100vh;
-}
+const sendBtn = document.getElementById("sendBtn");
 
-.sidebar{
-  width:280px;
-  background:#0d0a13;
-  border-right:1px solid rgba(255,255,255,0.05);
-  padding:25px;
-  overflow-y:auto;
-}
+const input = document.getElementById("messageInput");
 
-.sidebar-top{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
+const messages = document.getElementById("messages");
 
-.sidebar-top button{
-  padding:16px;
-  border:none;
-  border-radius:18px;
-  background:#171225;
-  color:white;
-}
+const history = document.getElementById("chatHistory");
 
-.chat-history{
-  margin-top:30px;
-}
+let chats = [];
 
-.history-item{
-  padding:14px;
-  border-radius:14px;
-  margin-bottom:10px;
-  background:#171225;
-}
+let lastUserMessage = "";
 
-.chat-main{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-}
+/* LOAD SAVED CHATS */
 
-.messages{
-  flex:1;
-  overflow-y:auto;
-  padding:40px;
-}
+window.onload = () => {
 
-.welcome-chat{
-  text-align:center;
-  margin-top:20vh;
-}
+  const saved =
+    localStorage.getItem("cookedChats");
 
-.welcome-chat h1{
-  font-size:70px;
-  background:linear-gradient(to right,#fff,#d946ef);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+  if(saved){
 
-.welcome-chat p{
-  color:#9ca3af;
-  margin-top:15px;
-}
+    messages.innerHTML = saved;
 
-.msg{
-  display:flex;
-  margin-bottom:25px;
-}
-
-.user-msg{
-  justify-content:flex-end;
-}
-
-.ai-msg{
-  justify-content:flex-start;
-}
-
-.bubble{
-  max-width:75%;
-  padding:18px 22px;
-  border-radius:24px;
-  line-height:1.7;
-  position:relative;
-}
-
-.user-msg .bubble{
-  background:linear-gradient(to right,#9333ea,#ec4899);
-}
-
-.ai-msg .bubble{
-  background:#171225;
-}
-
-.edit-btn{
-  margin-left:10px;
-  background:none;
-  border:none;
-  color:white;
-  cursor:pointer;
-}
-
-.chat-input{
-  padding:25px;
-  border-top:1px solid rgba(255,255,255,0.05);
-  display:flex;
-  gap:15px;
-}
-
-.chat-input input{
-  flex:1;
-  background:#171225;
-  border:none;
-  outline:none;
-  border-radius:25px;
-  padding:20px;
-  color:white;
-}
-
-.chat-input button{
-  width:60px;
-  border:none;
-  border-radius:50%;
-  background:linear-gradient(to right,#9333ea,#ec4899);
-  color:white;
-  font-size:20px;
-}
-
-.mobile-top{
-  display:none;
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-  .hero{
-    grid-template-columns:1fr;
   }
 
-  .hero-center h1{
-    font-size:70px;
-  }
+};
+
+/* HISTORY */
+
+function addHistory(title){
+
+  const item = document.createElement("div");
+
+  item.className = "history-item";
+
+  item.innerText = title;
+
+  history.prepend(item);
 
 }
 
-@media(max-width:768px){
+/* MAIN SEND */
 
-  .navbar{
-    padding:25px;
+function sendMessage(customMessage = null){
+
+  const text = customMessage || input.value.trim();
+
+  if(text === "") return;
+
+  lastUserMessage = text;
+
+  document.querySelector(".welcome-chat")?.remove();
+
+  /* USER MESSAGE */
+
+  if(!customMessage){
+
+    const userDiv = document.createElement("div");
+
+    userDiv.className = "msg user-msg";
+
+    userDiv.innerHTML = `
+      <div class="bubble">
+        ${text}
+        <button class="edit-btn">✏️</button>
+      </div>
+    `;
+
+    messages.appendChild(userDiv);
+
+    chats.push(text);
+
+    if(chats.length === 1){
+      addHistory(text.substring(0,25));
+    }
+
   }
 
-  .nav-links{
-    display:none;
-  }
+  input.value = "";
 
-  .hero{
-    padding:30px 25px 80px;
-  }
+  /* SAVE */
 
-  .hero-center h1{
-    font-size:56px;
-  }
+  localStorage.setItem(
+    "cookedChats",
+    messages.innerHTML
+  );
 
-  .setup-container h1{
-    font-size:42px;
-  }
+  /* THINKING */
 
-  .sidebar{
-    position:fixed;
-    left:-100%;
-    top:0;
-    height:100%;
-    z-index:999;
-    transition:0.3s;
-  }
+  const typing = document.createElement("div");
 
-  .sidebar.show{
-    left:0;
-  }
+  typing.className = "msg ai-msg";
 
-  .mobile-top{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:20px;
-  }
+  typing.innerHTML = `
+    <div class="bubble">
+      Thinking...
+    </div>
+  `;
 
-  .mobile-top button{
-    background:none;
-    border:none;
-    color:white;
-    font-size:24px;
-  }
+  messages.appendChild(typing);
 
-  .messages{
-    padding:20px;
-  }
+  messages.scrollTop = messages.scrollHeight;
 
-  .bubble{
-    max-width:90%;
-  }
+  /* API */
 
-  .welcome-chat h1{
-    font-size:48px;
-  }
+  fetch("/chat", {
+
+    method:"POST",
+
+    headers:{
+      "Content-Type":"application/json"
+    },
+
+    body:JSON.stringify({
+      message:text,
+      mood:localStorage.getItem("mood")
+    })
+
+  })
+
+  .then(res => res.json())
+
+  .then(data => {
+
+    typing.remove();
+
+    const aiDiv = document.createElement("div");
+
+    aiDiv.className = "msg ai-msg";
+
+    const bubble = document.createElement("div");
+
+    bubble.className = "bubble";
+
+    aiDiv.appendChild(bubble);
+
+    messages.appendChild(aiDiv);
+
+    let aiText = data.reply;
+
+    let index = 0;
+
+    /* TYPING EFFECT */
+
+    function typeEffect(){
+
+      if(index < aiText.length){
+
+        bubble.innerHTML = marked.parse(
+          aiText.substring(0,index)
+        );
+
+        index++;
+
+        messages.scrollTop = messages.scrollHeight;
+
+        setTimeout(typeEffect, 8);
+
+      }
+
+      else{
+
+        bubble.innerHTML += `
+          <button class="regen-btn">
+            ↻ Regenerate
+          </button>
+        `;
+
+        const regenBtn =
+          bubble.querySelector(".regen-btn");
+
+        regenBtn.addEventListener("click", () => {
+
+          aiDiv.remove();
+
+          sendMessage(lastUserMessage);
+
+        });
+
+        /* SAVE */
+
+        localStorage.setItem(
+          "cookedChats",
+          messages.innerHTML
+        );
+
+      }
+
+    }
+
+    typeEffect();
+
+  })
+
+  .catch(error => {
+
+    typing.remove();
+
+    const errorDiv = document.createElement("div");
+
+    errorDiv.className = "msg ai-msg";
+
+    errorDiv.innerHTML = `
+      <div class="bubble">
+        Error connecting to AI.
+      </div>
+    `;
+
+    messages.appendChild(errorDiv);
+
+  });
 
 }
-/* REGENERATE BUTTON */
 
-.regen-btn{
-  margin-top:15px;
-  background:none;
-  border:none;
-  color:#d946ef;
-  cursor:pointer;
-  font-size:14px;
+/* SEND BUTTON */
+
+if(sendBtn){
+
+  sendBtn.addEventListener("click", sendMessage);
+
+}
+
+/* ENTER KEY */
+
+if(input){
+
+  input.addEventListener("keypress", function(e){
+
+    if(e.key === "Enter"){
+      sendMessage();
+    }
+
+  });
+
+}
+
+/* NEW CHAT */
+
+const newChat = document.getElementById("newChat");
+
+if(newChat){
+
+  newChat.addEventListener("click", () => {
+
+    localStorage.removeItem("cookedChats");
+
+    messages.innerHTML = `
+      <div class="welcome-chat">
+
+        <h1>CookedGPT</h1>
+
+        <p>
+          emotionally unstable AI assistant
+        </p>
+
+      </div>
+    `;
+
+  });
+
 }
