@@ -1,96 +1,196 @@
-const sendBtn = document.getElementById("sendBtn");
-const input = document.getElementById("messageInput");
-const chatArea = document.getElementById("chatArea");
+/* MOODS */
+
+let selectedMood = "Savage";
+
+const moodCards = document.querySelectorAll(".mood-card");
+
+moodCards.forEach(card => {
+
+  card.addEventListener("click", () => {
+
+    moodCards.forEach(c => c.classList.remove("active"));
+
+    card.classList.add("active");
+
+    selectedMood = card.dataset.mood;
+
+  });
+
+});
+
+/* START */
+
+const startBtn = document.getElementById("startCooking");
+
+if(startBtn){
+
+  startBtn.addEventListener("click", () => {
+
+    localStorage.setItem("mood", selectedMood);
+
+    window.location.href = "/chatpage";
+
+  });
+
+}
+
+/* MOBILE SIDEBAR */
 
 const menuBtn = document.getElementById("menuBtn");
+
 const sidebar = document.getElementById("sidebar");
 
-/* Mobile Sidebar */
+if(menuBtn){
 
-menuBtn.addEventListener("click", () => {
-  sidebar.classList.toggle("active");
-});
+  menuBtn.addEventListener("click", () => {
 
-/* Send Message */
+    sidebar.classList.toggle("show");
 
-sendBtn.addEventListener("click", sendMessage);
+  });
 
-input.addEventListener("keypress", function(e){
-  if(e.key === "Enter"){
-    sendMessage();
-  }
-});
+}
+
+/* CHAT */
+
+const sendBtn = document.getElementById("sendBtn");
+
+const input = document.getElementById("messageInput");
+
+const messages = document.getElementById("messages");
+
+const history = document.getElementById("chatHistory");
+
+let chats = [];
+
+function addHistory(title){
+
+  const item = document.createElement("div");
+
+  item.className = "history-item";
+
+  item.innerText = title;
+
+  history.prepend(item);
+
+}
 
 function sendMessage(){
 
-  const message = input.value.trim();
+  const text = input.value.trim();
 
-  if(message === "") return;
+  if(text === "") return;
 
-  /* User Message */
+  document.querySelector(".welcome-chat")?.remove();
 
-  chatArea.innerHTML += `
-    <div class="user-message">
-      <div class="bubble">${message}</div>
+  const userDiv = document.createElement("div");
+
+  userDiv.className = "msg user-msg";
+
+  userDiv.innerHTML = `
+    <div class="bubble">
+      ${text}
+      <button class="edit-btn">✏️</button>
     </div>
   `;
+
+  messages.appendChild(userDiv);
+
+  chats.push(text);
+
+  if(chats.length === 1){
+    addHistory(text.substring(0,25));
+  }
 
   input.value = "";
 
-  /* AI Typing */
+  const typing = document.createElement("div");
 
-  chatArea.innerHTML += `
-    <div class="ai-message typing">
-      <div class="avatar">AI</div>
+  typing.className = "msg ai-msg";
 
-      <div class="bubble">
-        Typing...
-      </div>
+  typing.innerHTML = `
+    <div class="bubble">
+      Thinking...
     </div>
   `;
 
-  chatArea.scrollTop = chatArea.scrollHeight;
+  messages.appendChild(typing);
 
-  /* API */
+  messages.scrollTop = messages.scrollHeight;
 
-  fetch("/chat",{
+  fetch("/chat", {
+
     method:"POST",
+
     headers:{
       "Content-Type":"application/json"
     },
+
     body:JSON.stringify({
-      message:message
+      message:text,
+      mood:localStorage.getItem("mood")
     })
+
   })
+
   .then(res => res.json())
+
   .then(data => {
 
-    document.querySelector(".typing").remove();
+    typing.remove();
 
-    chatArea.innerHTML += `
-      <div class="ai-message">
-        <div class="avatar">AI</div>
+    const aiDiv = document.createElement("div");
 
-        <div class="bubble">
-          ${data.reply}
-        </div>
+    aiDiv.className = "msg ai-msg";
+
+    aiDiv.innerHTML = `
+      <div class="bubble">
+        ${data.reply}
       </div>
     `;
 
-    chatArea.scrollTop = chatArea.scrollHeight;
+    messages.appendChild(aiDiv);
 
-  })
-  .catch(err => {
+    messages.scrollTop = messages.scrollHeight;
 
-    document.querySelector(".typing").remove();
+  });
 
-    chatArea.innerHTML += `
-      <div class="ai-message">
-        <div class="avatar">AI</div>
+}
 
-        <div class="bubble">
-          Error connecting to AI.
-        </div>
+if(sendBtn){
+
+  sendBtn.addEventListener("click", sendMessage);
+
+}
+
+if(input){
+
+  input.addEventListener("keypress", function(e){
+
+    if(e.key === "Enter"){
+      sendMessage();
+    }
+
+  });
+
+}
+
+/* NEW CHAT */
+
+const newChat = document.getElementById("newChat");
+
+if(newChat){
+
+  newChat.addEventListener("click", () => {
+
+    messages.innerHTML = `
+      <div class="welcome-chat">
+
+        <h1>CookedGPT</h1>
+
+        <p>
+          emotionally unstable AI assistant
+        </p>
+
       </div>
     `;
 
