@@ -62,6 +62,23 @@ const history = document.getElementById("chatHistory");
 
 let chats = [];
 
+/* LOAD SAVED CHATS */
+
+window.onload = () => {
+
+  const saved =
+    localStorage.getItem("cookedChats");
+
+  if(saved){
+
+    messages.innerHTML = saved;
+
+  }
+
+};
+
+/* HISTORY */
+
 function addHistory(title){
 
   const item = document.createElement("div");
@@ -74,6 +91,8 @@ function addHistory(title){
 
 }
 
+/* SEND MESSAGE */
+
 function sendMessage(){
 
   const text = input.value.trim();
@@ -81,6 +100,8 @@ function sendMessage(){
   if(text === "") return;
 
   document.querySelector(".welcome-chat")?.remove();
+
+  /* USER MESSAGE */
 
   const userDiv = document.createElement("div");
 
@@ -103,6 +124,15 @@ function sendMessage(){
 
   input.value = "";
 
+  /* SAVE */
+
+  localStorage.setItem(
+    "cookedChats",
+    messages.innerHTML
+  );
+
+  /* THINKING */
+
   const typing = document.createElement("div");
 
   typing.className = "msg ai-msg";
@@ -116,6 +146,8 @@ function sendMessage(){
   messages.appendChild(typing);
 
   messages.scrollTop = messages.scrollHeight;
+
+  /* API */
 
   fetch("/chat", {
 
@@ -142,25 +174,90 @@ function sendMessage(){
 
     aiDiv.className = "msg ai-msg";
 
-    aiDiv.innerHTML = `
-      <div class="bubble">
-        marked.parse(data.reply)
-      </div>
-    `;
+    const bubble = document.createElement("div");
+
+    bubble.className = "bubble";
+
+    aiDiv.appendChild(bubble);
 
     messages.appendChild(aiDiv);
 
-    messages.scrollTop = messages.scrollHeight;
+    let aiText = data.reply;
+
+    let index = 0;
+
+    /* TYPING EFFECT */
+
+    function typeEffect(){
+
+      if(index < aiText.length){
+
+        bubble.innerHTML = marked.parse(
+          aiText.substring(0,index)
+        );
+
+        index++;
+
+        messages.scrollTop = messages.scrollHeight;
+
+        setTimeout(typeEffect, 8);
+
+      }
+
+      else{
+
+        /* REGENERATE BUTTON */
+
+        bubble.innerHTML += `
+          <button class="regen-btn">
+            ↻ Regenerate
+          </button>
+        `;
+
+        /* SAVE CHAT */
+
+        localStorage.setItem(
+          "cookedChats",
+          messages.innerHTML
+        );
+
+      }
+
+    }
+
+    typeEffect();
+
+  })
+
+  .catch(error => {
+
+    typing.remove();
+
+    const errorDiv = document.createElement("div");
+
+    errorDiv.className = "msg ai-msg";
+
+    errorDiv.innerHTML = `
+      <div class="bubble">
+        Error connecting to AI.
+      </div>
+    `;
+
+    messages.appendChild(errorDiv);
 
   });
 
 }
+
+/* SEND BUTTON */
 
 if(sendBtn){
 
   sendBtn.addEventListener("click", sendMessage);
 
 }
+
+/* ENTER KEY */
 
 if(input){
 
@@ -181,6 +278,8 @@ const newChat = document.getElementById("newChat");
 if(newChat){
 
   newChat.addEventListener("click", () => {
+
+    localStorage.removeItem("cookedChats");
 
     messages.innerHTML = `
       <div class="welcome-chat">
