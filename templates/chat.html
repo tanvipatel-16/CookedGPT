@@ -1,75 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CookedGPT</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CookedGPT Chat</title>
 
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
-<body>
+<body class="chat-body">
 
-<div class="app">
+<div class="chat-app">
 
-  <!-- Sidebar -->
+  <!-- SIDEBAR -->
+
   <aside class="sidebar" id="sidebar">
 
-    <div class="logo">
-      CookedGPT
+    <div class="sidebar-top">
+
+      <h2>CookedGPT</h2>
+
+      <button id="newChat">
+        + New Chat
+      </button>
+
     </div>
 
-    <button class="new-chat">
-      + New Chat
-    </button>
-
-    <div class="history">
-      <div class="chat-item">Marketing Ideas</div>
-      <div class="chat-item">Trip Story</div>
-      <div class="chat-item">Funny Roast</div>
-      <div class="chat-item">Business Help</div>
-    </div>
+    <div class="chat-history" id="chatHistory"></div>
 
   </aside>
 
-  <!-- Main -->
-  <main class="main">
+  <!-- MAIN -->
 
-    <!-- Mobile Top -->
+  <main class="chat-main">
+
     <div class="mobile-top">
 
       <button id="menuBtn">
         ☰
       </button>
 
-      <h2>CookedGPT</h2>
+      <span>CookedGPT</span>
 
     </div>
 
-    <!-- Chat Area -->
-    <div class="chat-area" id="chatArea">
+    <div class="messages" id="messages">
 
-      <div class="ai-message">
-        <div class="avatar">AI</div>
+      <div class="welcome-chat">
 
-        <div class="bubble">
-          Hey 👋 I'm CookedGPT. Ask me anything.
-        </div>
+        <h1>CookedGPT</h1>
+
+        <p>
+          emotionally unstable AI assistant
+        </p>
+
       </div>
 
     </div>
 
-    <!-- Input -->
     <div class="chat-input">
 
       <input
         type="text"
         id="messageInput"
-        placeholder="Message CookedGPT..."
-      />
+        placeholder="Ask anything..."
+      >
 
       <button id="sendBtn">
-        Send
+        ↑
       </button>
 
     </div>
