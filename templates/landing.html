@@ -1,175 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CookedGPT — The AI that destroys your emotional stability</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
 
-<!-- NAV -->
+  <title>CookedGPT</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body class="landing-body">
+
+<div class="bg-glow"></div>
+
 <nav class="navbar">
-  <a href="/" class="navbar-logo">
-    <div class="logo-icon">C</div>
-    COOKEDGPT
+
+  <div class="logo">
+
+    <div class="logo-box">
+      C
+    </div>
+
+    <span>COOKEDGPT</span>
+
+  </div>
+
+  <div class="nav-links">
+
+    <a href="#">How it works</a>
+    <a href="#">Moods</a>
+    <a href="#">Manifesto</a>
+
+  </div>
+
+  <a href="/setup" class="launch-btn">
+    LAUNCH →
   </a>
-  <ul class="navbar-links">
-    <li><a href="/#how-it-works">How it works</a></li>
-    <li><a href="/moods">Moods</a></li>
-    <li><a href="/#manifesto">Manifesto</a></li>
-  </ul>
-  <a href="/moods" class="btn-launch">LAUNCH →</a>
+
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <!-- Pot visual -->
-  <div class="hero-pot">
-    <div class="pot-wrap">
-      <div class="pot-glow"></div>
-      🍲
-    </div>
+
+  <div class="hero-left">
+
+    <img src="{{ url_for('static', filename='cooker.png') }}" alt="CookedGPT">
+
   </div>
 
-  <!-- Center -->
   <div class="hero-center">
-    <div class="version-badge">
-      <div class="version-dot"></div>
-      <span class="mono">NOW SERVING · V2.0</span>
+
+    <div class="badge">
+      ● NOW SERVING · V2.0
     </div>
 
-    <h1 class="hero-title">COOKED<span class="purple">GPT</span></h1>
+    <h1>COOKEDGPT</h1>
 
-    <p class="hero-sub">
-      THE AI THAT DESTROYS<br>
-      YOUR <span class="pink">EMOTIONAL STABILITY</span>
+    <h2>
+      THE AI THAT DESTROYS <br>
+      YOUR <span>EMOTIONAL STABILITY</span>
+    </h2>
+
+    <p>
+      An unhinged roast engine trained on chaos.
+      Pick a mood and let it cook.
     </p>
 
-    <p class="hero-desc">
-      An unhinged roast engine trained on chaos.<br>
-      Pick a mood, set the heat, and let it cook.
-    </p>
-
-    <a href="/moods" class="btn-primary">
-      OPEN YOUR MIND <span class="fire">🔥</span>
+    <a href="/setup" class="main-btn">
+      OPEN YOUR MIND 🧠
     </a>
 
-    <div class="hero-badges mono">
-      <span>NO SIGNUP</span>
-      <span class="sep">•</span>
-      <span>PURE CHAOS</span>
-      <span class="sep">•</span>
-      <span>18+ VIBES</span>
-    </div>
   </div>
 
-  <!-- Steps -->
-  <div class="hero-steps" id="how-it-works">
-    <div class="step-card">
-      <div class="step-icon">✦</div>
-      <div>
-        <div class="step-label mono">STEP 01</div>
-        <div class="step-title">Select your chaos mood</div>
-        <div class="step-desc">Six unhinged personalities. Pick the energy that matches your day.</div>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-icon">🔥</div>
-      <div>
-        <div class="step-label mono">STEP 02</div>
-        <div class="step-title">Increase roast intensity</div>
-        <div class="step-desc">From light singe to nuclear meltdown. You control the burner.</div>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-icon">🛡️</div>
-      <div>
-        <div class="step-label mono">STEP 03</div>
-        <div class="step-title">Get emotionally cooked</div>
-        <div class="step-desc">Receive surgical, deeply personal verbal demolition. Therapy not included.</div>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- MOODS STRIP -->
-<section class="moods-section">
-  <div class="section-header">
-    <div>
-      <div class="section-eyebrow mono">THE ROSTER</div>
-      <h2 class="section-title">SIX FLAVORS OF <span class="pink">COOKED</span></h2>
-    </div>
-    <p class="section-aside">Each personality has its own voice, vocabulary, and trauma. Pick yours.</p>
-  </div>
-
-  <div class="moods-strip">
-    <a href="/moods" class="mood-mini" style="text-decoration:none;">
-      <span class="num mono">01</span>
-      <span class="emoji">😈</span>
-      <span class="name mono">DEMONIC</span>
-    </a>
-    <a href="/moods" class="mood-mini" style="text-decoration:none;">
-      <span class="num mono">02</span>
-      <span class="emoji">🧊</span>
-      <span class="name mono">ICE COLD</span>
-    </a>
-    <a href="/moods" class="mood-mini" style="text-decoration:none;">
-      <span class="num mono">03</span>
-      <span class="emoji">👑</span>
-      <span class="name mono">DIVA</span>
-    </a>
-    <a href="/moods" class="mood-mini" style="text-decoration:none;">
-      <span class="num mono">04</span>
-      <span class="emoji">🤖</span>
-      <span class="name mono">ROBOTIC</span>
-    </a>
-    <a href="/moods" class="mood-mini" style="text-decoration:none;">
-      <span class="num mono">05</span>
-      <span class="emoji">🔥</span>
-      <span class="name mono">NUCLEAR</span>
-    </a>
-    <a href="/moods" class="mood-mini" style="text-decoration:none;">
-      <span class="num mono">06</span>
-      <span class="emoji">🧠</span>
-      <span class="name mono">THERAPIST</span>
-    </a>
-  </div>
-</section>
-
-<!-- MANIFESTO -->
-<div class="manifesto" id="manifesto">
-  <div class="manifesto-eyebrow mono">MANIFESTO · 001</div>
-  <h3 class="manifesto-title">
-    We didn't build a chatbot.<br>
-    We built a <span class="amber">flame</span> that talks back.
-  </h3>
-  <p class="manifesto-body">
-    CookedGPT exists to dismantle the lifeless, customer-service tone of modern AI.
-    It says what your group chat is too polite to say. It listens, learns your patterns,
-    and serves them back medium rare. Use responsibly. Or don't.
-  </p>
-  <div class="manifesto-cta">
-    <a href="/moods" class="btn-primary" style="border-radius:12px; box-shadow:0 0 30px rgba(168,85,247,.3);">
-      OPEN YOUR MIND <span class="fire">🔥</span>
-    </a>
-    <span class="cta-note mono">TAKES ABOUT 30 SECONDS</span>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div>
-    <div class="footer-brand">COOKEDGPT</div>
-    <div class="footer-tagline">Serve cooked. Built different.</div>
-  </div>
-  <div class="footer-links">
-    <a href="#">TWITTER</a>
-    <a href="#">DISCORD</a>
-    <a href="#">PRIVACY</a>
-  </div>
-</footer>
-
-<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
