@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, jsonify
 from groq import Groq
 
 app = Flask(__name__)
-client = Groq(api_key=os.environ.get("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"))
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 # ─── PERSONALITY SYSTEM PROMPTS ───────────────────────────────────────
 PERSONAS = {
