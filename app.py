@@ -69,13 +69,14 @@ def chat():
         return jsonify({
             "reply": reply
         })
-  except Exception as e:
 
-    print("ERROR:", e)
+    except Exception as e:
 
-    return jsonify({
-        "reply": str(e)
-    })
+        print("ERROR:", e)
+
+        return jsonify({
+            "reply": str(e)
+        })
    
 
 if __name__ == "__main__":
