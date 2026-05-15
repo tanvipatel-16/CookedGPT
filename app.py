@@ -5,7 +5,7 @@ import openai
 app = Flask(__name__)
 
 # Use your actual API key
-openai.api_key = "YOUR_OPENAI_API_KEY"
+groq.api_key = "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"
 
 @app.route('/')
 def landing():
