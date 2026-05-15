@@ -25,7 +25,7 @@ def landing():
 
 @app.route("/moods")
 def moods():
-    return render_template("moods.html")
+    return render_template("index.html")
 
 
 @app.route("/chat")
