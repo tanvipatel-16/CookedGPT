@@ -1,201 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CookedGPT — Chat</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CookedGPT</title>
+
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <style>
-    body { overflow: hidden; height: 100vh; }
-    .justify-end { justify-content: flex-end; }
-  </style>
 </head>
+
 <body>
 
-<div class="chat-layout">
+<div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-top">
-      <div class="sidebar-logo">
-        <div class="logo-icon">C</div>
-        COOKEDGPT
-      </div>
-      <a href="/moods" class="btn-new-cook">+ NEW COOK</a>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+      CookedGPT
     </div>
 
-    <div class="sidebar-search">
-      <div class="search-wrap">
-        <span class="search-icon">🔍</span>
-        <input type="text" class="search-input" placeholder="Search history">
-      </div>
+    <button class="new-chat">
+      + New Chat
+    </button>
+
+    <div class="history">
+      <div class="chat-item">Marketing Ideas</div>
+      <div class="chat-item">Trip Story</div>
+      <div class="chat-item">Funny Roast</div>
+      <div class="chat-item">Business Help</div>
     </div>
 
-    <div class="sidebar-history">
-      <div class="history-section-label mono">RECENT</div>
-
-      <div class="history-item active">
-        <span class="history-emoji" id="sidebar-emoji">😈</span>
-        <span class="history-text">Why am I like this</span>
-        <span class="history-time mono">2M</span>
-      </div>
-      <div class="history-item">
-        <span class="history-emoji">👑</span>
-        <span class="history-text">Roast my Spotify Wr...</span>
-        <span class="history-time mono">1H</span>
-      </div>
-      <div class="history-item">
-        <span class="history-emoji">🧊</span>
-        <span class="history-text">Be honest about my ...</span>
-        <span class="history-time mono">3H</span>
-      </div>
-      <div class="history-item">
-        <span class="history-emoji">🤖</span>
-        <span class="history-text">My LinkedIn...</span>
-        <span class="history-time mono">YESTERDAY</span>
-      </div>
-      <div class="history-item">
-        <span class="history-emoji">🧠</span>
-        <span class="history-text">Therapist mode test</span>
-        <span class="history-time mono">2D</span>
-      </div>
-      <div class="history-item">
-        <span class="history-emoji">🔥</span>
-        <span class="history-text">Nuclear option</span>
-        <span class="history-time mono">4D</span>
-      </div>
-    </div>
-
-    <div class="sidebar-personality">
-      <div class="personality-section-label mono">PERSONALITY</div>
-
-      <div class="personality-switcher" onclick="window.location.href='/moods'">
-        <div class="personality-left">
-          <span class="personality-emoji" id="sidebar-persona-emoji">😈</span>
-          <div>
-            <span class="personality-name" id="sidebar-persona-name">DEMONIC</span>
-            <span class="personality-switch-label mono">SWITCH</span>
-          </div>
-        </div>
-        <span class="personality-arrow">⌄</span>
-      </div>
-
-      <div class="user-card">
-        <div class="user-left">
-          <div class="user-avatar">Y</div>
-          <div>
-            <div class="user-name">You · Free</div>
-            <div class="user-cooks mono">3 COOKS LEFT TODAY</div>
-          </div>
-        </div>
-        <span class="user-settings">⚙️</span>
-      </div>
-    </div>
   </aside>
 
-  <!-- MAIN CHAT -->
-  <main class="chat-main">
+  <!-- Main -->
+  <main class="main">
 
-    <!-- Top bar -->
-    <div class="chat-topbar">
-      <div class="active-persona">
-        <span class="active-persona-emoji" id="active-emoji">😈</span>
-        <div>
-          <div class="active-persona-name">
-            <span id="active-name">DEMONIC</span>
-            <span class="heat-badge" id="active-heat">🔥 7/10</span>
-          </div>
-          <div class="active-persona-sub" id="active-sub">devil's advocate energy</div>
-        </div>
-      </div>
+    <!-- Mobile Top -->
+    <div class="mobile-top">
 
-      <div class="topbar-right">
-        <button class="btn-upgrade">⚡ UPGRADE</button>
-        <button class="btn-settings">⚙️</button>
-      </div>
+      <button id="menuBtn">
+        ☰
+      </button>
+
+      <h2>CookedGPT</h2>
+
     </div>
 
-    <!-- Messages -->
-    <div class="chat-messages" id="chat-messages">
-      <!-- Session header -->
-      <div class="session-header">
-        <div class="session-emoji" id="session-emoji">😈</div>
-        <div class="session-label mono">
-          SESSION · <span class="purple" id="session-name">DEMONIC</span> · <span class="purple" id="session-heat">7/10</span>
-        </div>
-        <div class="session-sub">Anything you say can and will be used against you.</div>
-      </div>
+    <!-- Chat Area -->
+    <div class="chat-area" id="chatArea">
 
-      <!-- Intro messages -->
-      <div class="message-wrap">
-        <div class="msg-avatar" id="msg-avatar-1">😈</div>
-        <div class="msg-bubble">
-          <p class="msg-text" id="intro-msg-1">Connection established. Persona loaded: DEMONIC. Heat: WELL DONE (7/10). Ready when you are.</p>
-          <p class="msg-time mono">JUST NOW</p>
+      <div class="ai-message">
+        <div class="avatar">AI</div>
+
+        <div class="bubble">
+          Hey 👋 I'm CookedGPT. Ask me anything.
         </div>
       </div>
 
-      <div class="message-wrap">
-        <div class="msg-avatar" id="msg-avatar-2">😈</div>
-        <div class="msg-bubble">
-          <p class="msg-text" id="intro-msg-2">Be honest. The reason you opened this app tonight is not a mystery.</p>
-          <p class="msg-time mono">JUST NOW</p>
-        </div>
-      </div>
     </div>
 
-    <!-- Input area -->
-    <div class="chat-input-area">
-      <div class="quick-prompts">
-        <button class="quick-btn">Roast my Spotify</button>
-        <button class="quick-btn">Be brutally honest</button>
-        <button class="quick-btn">What's my biggest flaw?</button>
-      </div>
+    <!-- Input -->
+    <div class="chat-input">
 
-      <div class="input-box">
-        <span class="input-icon">🖼️</span>
-        <span class="input-icon">😊</span>
-        <input
-          type="text"
-          class="chat-text-input"
-          id="chat-input"
-          placeholder="Say something to Demonic..."
-          autocomplete="off"
-        >
-        <span class="input-icon">🎤</span>
-        <button class="btn-send" id="send-btn">➤</button>
-      </div>
+      <input
+        type="text"
+        id="messageInput"
+        placeholder="Message CookedGPT..."
+      />
 
-      <div class="chat-disclaimer mono">
-        ✦ COOKEDGPT MAY PRODUCE DEVASTATINGLY ACCURATE OUTPUT
-      </div>
+      <button id="sendBtn">
+        Send
+      </button>
+
     </div>
 
   </main>
+
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
-<script>
-  // Update placeholder and avatar based on mood
-  document.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const moodKey = urlParams.get('mood') || 'demonic';
-    const moodNames = {
-      'demonic':'Demonic','ice-cold':'Ice Cold','diva':'Diva',
-      'robotic':'Robotic','nuclear':'Nuclear','therapist':'Therapist'
-    };
-    const inputEl = document.getElementById('chat-input');
-    if (inputEl) inputEl.placeholder = `Say something to ${moodNames[moodKey] || 'Demonic'}...`;
 
-    // Set all avatars in initial messages
-    const avatars = document.querySelectorAll('.msg-avatar');
-    const MOODS_EMOJI = { demonic:'😈','ice-cold':'🧊',diva:'👑',robotic:'🤖',nuclear:'🔥',therapist:'🧠' };
-    avatars.forEach(a => a.textContent = MOODS_EMOJI[moodKey] || '😈');
-
-    // Set sidebar persona emoji
-    const sidebarEmoji = document.getElementById('sidebar-emoji');
-    if (sidebarEmoji) sidebarEmoji.textContent = MOODS_EMOJI[moodKey] || '😈';
-  });
-</script>
 </body>
 </html>
