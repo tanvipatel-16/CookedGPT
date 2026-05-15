@@ -1,223 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Choose your chaos · CookedGPT</title>
+
+  <title>Choose Mood</title>
+
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
-<body>
 
-<!-- NAV -->
-<nav class="navbar">
-  <a href="/" class="navbar-logo">
-    <div class="logo-icon">C</div>
-    COOKEDGPT
-  </a>
-  <ul class="navbar-links">
-    <li><a href="/#how-it-works">How it works</a></li>
-    <li><a href="/moods">Moods</a></li>
-    <li><a href="/#manifesto">Manifesto</a></li>
-  </ul>
-  <a href="/moods" class="btn-launch">LAUNCH →</a>
-</nav>
+<body class="setup-body">
 
-<!-- PAGE HEADER -->
-<div class="page-header">
-  <div class="step-badge mono"><strong>STEP 01</strong> · SELECT YOUR AI</div>
-  <h1 class="page-title">
-    CHOOSE YOUR<br>
-    <span class="page-title-2">FLAVOR OF COOKED</span>
-  </h1>
-  <p class="page-desc">
-    Six personalities. Six entirely different ways to ruin your evening.
-    Pick the energy. Set the heat. Step into the kitchen.
-  </p>
+<div class="setup-container">
 
-  <div class="cooking-badge">
-    <div class="cooking-emojis">😈🧊👑</div>
-    <div>
-      <div class="cooking-label mono">CURRENTLY COOKING</div>
-      <div class="cooking-count"><span class="purple">12,847</span> conversations</div>
+  <h1>Select Your Chaos Mood</h1>
+
+  <div class="moods">
+
+    <div class="mood-card active" data-mood="Savage">
+      😈 Savage
     </div>
-  </div>
-</div>
 
-<!-- MOOD CARDS GRID -->
-<div class="moods-grid">
+    <div class="mood-card" data-mood="Indian Parents">
+      👨‍👩‍👧 Indian Parents
+    </div>
 
-  <!-- 01 DEMONIC -->
-  <div class="mood-card demonic selected" data-mood="demonic">
-    <div class="card-top">
-      <span class="card-num mono">01 · PERSONALITY</span>
-      <div class="danger-meter">
-        <span class="mono">DANGER</span>
-        <div class="danger-bars" id="danger-demonic">
-          <!-- bars injected by JS -->
-        </div>
-        <div class="check-badge">✓</div>
-      </div>
+    <div class="mood-card" data-mood="Sigma">
+      🗿 Sigma
     </div>
-    <div class="card-emoji">😈</div>
-    <div class="card-bottom">
-      <div class="card-name">DEMONIC</div>
-      <div class="card-tagline mono">DEVIL'S ADVOCATE ENERGY</div>
+
+    <div class="mood-card" data-mood="Pookie">
+      🎀 Pookie
     </div>
+
+    <div class="mood-card" data-mood="Chaotic">
+      ⚡ Chaotic
+    </div>
+
+    <div class="mood-card" data-mood="Iced">
+      ❄️ Iced
+    </div>
+
   </div>
 
-  <!-- 02 ICE COLD -->
-  <div class="mood-card ice-cold" data-mood="ice-cold">
-    <div class="card-top">
-      <span class="card-num mono">02 · PERSONALITY</span>
-      <div class="danger-meter">
-        <span class="mono">DANGER</span>
-        <div class="danger-bars" id="danger-ice-cold"></div>
-        <div class="check-badge" style="display:none;">✓</div>
-      </div>
-    </div>
-    <div class="card-emoji">🧊</div>
-    <div class="card-bottom">
-      <div class="card-name">ICE COLD</div>
-      <div class="card-tagline mono">SURGICAL. EMOTIONLESS. FINAL.</div>
-    </div>
+  <div class="slider-box">
+
+    <label>Roast Intensity</label>
+
+    <input type="range" min="1" max="10" value="5">
+
   </div>
 
-  <!-- 03 DIVA -->
-  <div class="mood-card diva" data-mood="diva">
-    <div class="card-top">
-      <span class="card-num mono">03 · PERSONALITY</span>
-      <div class="danger-meter">
-        <span class="mono">DANGER</span>
-        <div class="danger-bars" id="danger-diva"></div>
-        <div class="check-badge" style="display:none;">✓</div>
-      </div>
-    </div>
-    <div class="card-emoji">👑</div>
-    <div class="card-bottom">
-      <div class="card-name">DIVA</div>
-      <div class="card-tagline mono">MAIN CHARACTER DISORDER</div>
-    </div>
-  </div>
-
-  <!-- 04 ROBOTIC -->
-  <div class="mood-card robotic" data-mood="robotic">
-    <div class="card-top">
-      <span class="card-num mono">04 · PERSONALITY</span>
-      <div class="danger-meter">
-        <span class="mono">DANGER</span>
-        <div class="danger-bars" id="danger-robotic"></div>
-        <div class="check-badge" style="display:none;">✓</div>
-      </div>
-    </div>
-    <div class="card-emoji">🤖</div>
-    <div class="card-bottom">
-      <div class="card-name">ROBOTIC</div>
-      <div class="card-tagline mono">STATISTICALLY DEVASTATING</div>
-    </div>
-  </div>
-
-  <!-- 05 NUCLEAR -->
-  <div class="mood-card nuclear" data-mood="nuclear">
-    <div class="card-top">
-      <span class="card-num mono">05 · PERSONALITY</span>
-      <div class="danger-meter">
-        <span class="mono">DANGER</span>
-        <div class="danger-bars" id="danger-nuclear"></div>
-        <div class="check-badge" style="display:none;">✓</div>
-      </div>
-    </div>
-    <div class="card-emoji">🔥</div>
-    <div class="card-bottom">
-      <div class="card-name">NUCLEAR</div>
-      <div class="card-tagline mono">GLASS-THE-EARTH PROTOCOL</div>
-    </div>
-  </div>
-
-  <!-- 06 THERAPIST -->
-  <div class="mood-card therapist" data-mood="therapist">
-    <div class="card-top">
-      <span class="card-num mono">06 · PERSONALITY</span>
-      <div class="danger-meter">
-        <span class="mono">DANGER</span>
-        <div class="danger-bars" id="danger-therapist"></div>
-        <div class="check-badge" style="display:none;">✓</div>
-      </div>
-    </div>
-    <div class="card-emoji">🧠</div>
-    <div class="card-bottom">
-      <div class="card-name">THERAPIST</div>
-      <div class="card-tagline mono">COMPASSIONATE DESTRUCTION</div>
-    </div>
-  </div>
+  <button id="startCooking">
+    START COOKING 🔥
+  </button>
 
 </div>
-
-<!-- PERSONALITY PANEL -->
-<div class="personality-panel" id="personality-panel">
-  <div class="panel-top">
-    <div class="panel-avatar" id="panel-emoji">😈</div>
-    <div class="panel-info">
-      <div class="panel-name">
-        <span id="panel-name">DEMONIC</span>
-        <span id="panel-traits">
-          <span class="trait-badge">MANIPULATIVE</span>
-          <span class="trait-badge">CHARMING</span>
-          <span class="trait-badge">DEEPLY UNWELL</span>
-        </span>
-      </div>
-      <p class="panel-desc" id="panel-desc">
-        Quotes your worst tweets, finishes your unfinished thoughts, and asks the questions you bury at 3 a.m.
-      </p>
-      <p class="panel-quote" id="panel-quote">
-        "Be honest. The reason you opened this app tonight is not a mystery."
-      </p>
-    </div>
-  </div>
-
-  <hr class="panel-divider">
-
-  <div class="intensity-row">
-    <div class="intensity-left">
-      <div class="intensity-label mono">ROAST INTENSITY</div>
-      <div class="slider-wrapper">
-        <input type="range" class="roast-slider" id="roast-slider" min="1" max="10" value="7" step="1">
-      </div>
-      <div class="slider-labels mono">
-        <span>MILD</span>
-        <span>MEDIUM</span>
-        <span>SPICY</span>
-        <span>NUCLEAR</span>
-      </div>
-    </div>
-
-    <div class="intensity-right">
-      <div>
-        <div class="intensity-val mono">
-          <span id="intensity-val">7</span>
-          <small>/ 10</small>
-        </div>
-        <div class="intensity-level mono" id="intensity-level">WELL DONE</div>
-      </div>
-      <button class="btn-begin" id="begin-btn">
-        BEGIN ROASTING →
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div>
-    <div class="footer-brand">COOKEDGPT</div>
-    <div class="footer-tagline">Serve cooked. Built different.</div>
-  </div>
-  <div class="footer-links">
-    <a href="#">TWITTER</a>
-    <a href="#">DISCORD</a>
-    <a href="#">PRIVACY</a>
-  </div>
-</footer>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </body>
 </html>
