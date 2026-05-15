@@ -1,4 +1,3 @@
-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
 import os
 from flask import Flask, render_template, request, jsonify
 from groq import Groq
