@@ -1,3 +1,13 @@
+/* CLEAR OLD BROKEN STORAGE ONCE */
+
+if(localStorage.getItem("brokenFix") !== "done"){
+
+  localStorage.removeItem("cookedChats");
+
+  localStorage.setItem("brokenFix","done");
+
+}
+
 /* MOODS */
 
 let selectedMood = "Savage";
@@ -62,6 +72,8 @@ const history = document.getElementById("chatHistory");
 
 let chats = [];
 
+let lastUserMessage = "";
+
 /* LOAD SAVED CHATS */
 
 window.onload = () => {
@@ -69,7 +81,7 @@ window.onload = () => {
   const saved =
     localStorage.getItem("cookedChats");
 
-  if(saved){
+  if(saved && messages){
 
     messages.innerHTML = saved;
 
@@ -81,6 +93,8 @@ window.onload = () => {
 
 function addHistory(title){
 
+  if(!history) return;
+
   const item = document.createElement("div");
 
   item.className = "history-item";
@@ -91,45 +105,47 @@ function addHistory(title){
 
 }
 
-/* SEND MESSAGE */
+/* MAIN SEND */
 
-function sendMessage(){
+function sendMessage(customMessage = null){
 
-  const text = input.value.trim();
+  if(!messages) return;
+
+  const text = customMessage || input.value.trim();
 
   if(text === "") return;
+
+  lastUserMessage = text;
 
   document.querySelector(".welcome-chat")?.remove();
 
   /* USER MESSAGE */
 
-  const userDiv = document.createElement("div");
+  if(!customMessage){
 
-  userDiv.className = "msg user-msg";
+    const userDiv = document.createElement("div");
 
-  userDiv.innerHTML = `
-    <div class="bubble">
-      ${text}
-      <button class="edit-btn">✏️</button>
-    </div>
-  `;
+    userDiv.className = "msg user-msg";
 
-  messages.appendChild(userDiv);
+    userDiv.innerHTML = `
+      <div class="bubble">
+        ${text}
+      </div>
+    `;
 
-  chats.push(text);
+    messages.appendChild(userDiv);
 
-  if(chats.length === 1){
-    addHistory(text.substring(0,25));
+    chats.push(text);
+
+    if(chats.length === 1){
+      addHistory(text.substring(0,25));
+    }
+
   }
 
-  input.value = "";
-
-  /* SAVE */
-
-  localStorage.setItem(
-    "cookedChats",
-    messages.innerHTML
-  );
+  if(input){
+    input.value = "";
+  }
 
   /* THINKING */
 
@@ -192,9 +208,20 @@ function sendMessage(){
 
       if(index < aiText.length){
 
-        bubble.innerHTML = marked.parse(
-          aiText.substring(0,index)
-        );
+        if(typeof marked !== "undefined"){
+
+          bubble.innerHTML = marked.parse(
+            aiText.substring(0,index)
+          );
+
+        }
+
+        else{
+
+          bubble.innerHTML =
+            aiText.substring(0,index);
+
+        }
 
         index++;
 
@@ -213,6 +240,17 @@ function sendMessage(){
             ↻ Regenerate
           </button>
         `;
+
+        const regenBtn =
+          bubble.querySelector(".regen-btn");
+
+        regenBtn.addEventListener("click", () => {
+
+          aiDiv.remove();
+
+          sendMessage(lastUserMessage);
+
+        });
 
         /* SAVE CHAT */
 
