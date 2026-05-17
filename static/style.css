@@ -289,3 +289,21 @@ body.chat-page{overflow:hidden;height:100vh;}
   .panel-top{flex-direction:column;}
   .hero-title{font-size:2.6rem;}
 }
+.footer{
+display:flex;
+justify-content:center;
+gap:30px;
+padding:30px;
+font-size:14px;
+color:#888;
+}
+
+.footer a{
+color:#a855f7;
+text-decoration:none;
+transition:0.3s;
+}
+
+.footer a:hover{
+color:#d946ef;
+}
