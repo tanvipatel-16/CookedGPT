@@ -9,21 +9,18 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 client = Groq(
     api_key=GROQ_API_KEY
 )
-
-# LANDING PAGE
 @app.route("/")
 def landing():
     return render_template("landing.html")
 
-# SETUP PAGE
-@app.route("/setup")
-def setup():
+@app.route("/moods")
+def moods():
     return render_template("index.html")
 
-# CHAT PAGE
 @app.route("/chatpage")
 def chatpage():
     return render_template("chat.html")
+
 
 # AI CHAT API
 @app.route("/chat", methods=["POST"])
