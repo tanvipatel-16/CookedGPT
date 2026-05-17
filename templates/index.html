@@ -1,12 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moods</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Choose Mood</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#05010d;
+color:white;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px;
+}
+
+.mood-container{
+width:100%;
+max-width:1200px;
+text-align:center;
+}
+
+h1{
+font-size:60px;
+margin-bottom:50px;
+color:#f5d0fe;
+text-shadow:0 0 25px #d946ef;
+}
+
+.moods-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+}
+
+.mood-card{
+padding:40px 20px;
+border-radius:30px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(12px);
+cursor:pointer;
+transition:0.3s;
+}
+
+.mood-card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 30px #d946ef;
+}
+
+.mood-card.active{
+border:2px solid #d946ef;
+box-shadow:0 0 30px #d946ef;
+}
+
+.emoji{
+font-size:65px;
+margin-bottom:18px;
+}
+
+.mood-card h2{
+font-size:28px;
+}
+
+.confirm-btn{
+margin-top:50px;
+padding:18px 40px;
+border:none;
+border-radius:999px;
+background:linear-gradient(90deg,#9333ea,#ec4899);
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 30px rgba(217,70,239,0.5);
+}
+
+@media(max-width:700px){
+
+h1{
+font-size:42px;
+}
+
+}
+
+</style>
+
 </head>
-<body class="mood-body">
+
+<body>
 
 <div class="mood-container">
 
@@ -15,33 +110,33 @@
 <div class="moods-grid">
 
 <div class="mood-card active" data-mood="Savage">
-  <div class="emoji">😈</div>
-  <h2>Savage</h2>
+<div class="emoji">😈</div>
+<h2>Savage</h2>
 </div>
 
 <div class="mood-card" data-mood="Indian Parents">
-  <div class="emoji">🩴</div>
-  <h2>Indian Parents</h2>
+<div class="emoji">🩴</div>
+<h2>Indian Parents</h2>
 </div>
 
 <div class="mood-card" data-mood="Sigma">
-  <div class="emoji">🗿</div>
-  <h2>Sigma</h2>
+<div class="emoji">🗿</div>
+<h2>Sigma</h2>
 </div>
 
 <div class="mood-card" data-mood="Pookie">
-  <div class="emoji">🎀</div>
-  <h2>Pookie</h2>
+<div class="emoji">🎀</div>
+<h2>Pookie</h2>
 </div>
 
 <div class="mood-card" data-mood="Chaotic">
-  <div class="emoji">🤪</div>
-  <h2>Chaotic</h2>
+<div class="emoji">🤪</div>
+<h2>Chaotic</h2>
 </div>
 
 <div class="mood-card" data-mood="Iced">
-  <div class="emoji">🥶</div>
-  <h2>Iced</h2>
+<div class="emoji">🥶</div>
+<h2>Iced</h2>
 </div>
 
 </div>
@@ -52,7 +147,44 @@ CONFIRM MOOD
 
 </div>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+
+let selectedMood = "Savage";
+
+const moodCards =
+document.querySelectorAll(".mood-card");
+
+moodCards.forEach(card => {
+
+card.addEventListener("click", () => {
+
+moodCards.forEach(c =>
+c.classList.remove("active")
+);
+
+card.classList.add("active");
+
+selectedMood = card.dataset.mood;
+
+});
+
+});
+
+document
+.getElementById("startCooking")
+.addEventListener("click", () => {
+
+localStorage.setItem(
+"mood",
+selectedMood
+);
+
+window.location.href = "/chatpage";
+
+});
+
+</script>
 
 </body>
+
 </html>
