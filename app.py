@@ -28,37 +28,30 @@ def chat():
 
     data = request.get_json()
 
-    message = data.get("message")
+   user_message = data.get("message")
+
     mood = data.get("mood", "Savage")
 
     try:
 
-        system_prompt = f"""
-        You are CookedGPT.
-
-        Current personality mode: {mood}
-
-        Be funny, modern, Gen-Z styled, entertaining and conversational.
-        Keep responses readable and engaging.
-        """
-
         completion = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+
+            model="llama-3.3-70b-versatile",
 
             messages=[
+
                 {
                     "role": "system",
-                    "content": system_prompt
+                    "content": f"You are CookedGPT. Reply in {mood} style."
                 },
 
                 {
                     "role": "user",
-                    "content": message
+                    "content": user_message
                 }
-            ],
 
-            temperature=0.9,
-            max_tokens=1024
+            ]
+
         )
 
         reply = completion.choices[0].message.content
@@ -67,14 +60,11 @@ def chat():
             "reply": reply
         })
 
-    except Exception as e:
-
-        print("ERROR:", e)
+      except Exception as e:
 
         return jsonify({
-            "reply": str(e)
+            "reply": f"Error: {str(e)}"
         })
-   
-
+    
 if __name__ == "__main__":
     app.run(debug=True)
