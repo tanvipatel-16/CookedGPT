@@ -1,203 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Choose Mood</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
-body{
-background:#05010d;
-color:white;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:40px;
-}
-
-.mood-container{
-width:100%;
-max-width:1200px;
-text-align:center;
-}
-
-h1{
-font-size:60px;
-margin-bottom:50px;
-color:#f5d0fe;
-text-shadow:0 0 25px #d946ef;
-}
-
-.moods-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:30px;
-}
-
-.mood-card{
-padding:40px 20px;
-border-radius:30px;
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
-backdrop-filter:blur(12px);
-cursor:pointer;
-transition:0.3s;
-}
-
-.mood-card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 30px #d946ef;
-}
-
-.mood-card.active{
-border:2px solid #d946ef;
-box-shadow:0 0 30px #d946ef;
-}
-
-.emoji{
-font-size:65px;
-margin-bottom:18px;
-}
-
-.mood-card h2{
-font-size:28px;
-}
-
-.confirm-btn{
-margin-top:50px;
-padding:18px 40px;
-border:none;
-border-radius:999px;
-background:linear-gradient(90deg,#9333ea,#ec4899);
-color:white;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 0 30px rgba(217,70,239,0.5);
-}
-
-@media(max-width:700px){
-
-h1{
-font-size:42px;
-}
-
-}
-
-</style>
-
+<title>Choose your chaos · CookedGPT</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
-<div class="mood-container">
+<nav class="navbar">
+  <a href="/" class="navbar-logo"><div class="logo-icon">C</div>COOKEDGPT</a>
+  <ul class="navbar-links">
+    <li><a href="/#how-it-works">How it works</a></li>
+    <li><a href="/moods">Moods</a></li>
+    <li><a href="/#manifesto">Manifesto</a></li>
+  </ul>
+</nav>
 
-<h1>CHOOSE YOUR CHAOS MOOD</h1>
+<div class="page-header">
+  <div class="step-badge" style="font-family:'Space Mono',monospace;"><strong>STEP 01</strong> · SELECT YOUR AI</div>
+  <h1 class="page-title">CHOOSE YOUR<br><span class="chaos">CHAOS MOOD</span></h1>
+  <p class="page-desc">Six personalities. Six entirely different ways to ruin your evening. Pick the energy. Set the heat. Step into the kitchen.</p>
+  <div class="cooking-badge">
+    <div class="cooking-emojis">👑🔥😶</div>
+    <div>
+      <div class="cooking-label" style="font-family:'Space Mono',monospace;">CURRENTLY COOKING</div>
+      <div class="cooking-count"><span class="purple">12,847</span> conversations</div>
+    </div>
+  </div>
+</div>
 
 <div class="moods-grid">
 
-<div class="mood-card active" data-mood="Savage">
-<div class="emoji">😈</div>
-<h2>Savage</h2>
+  <div class="mood-card diva" data-mood="diva">
+    <div class="card-top">
+      <span class="card-num" style="font-family:'Space Mono',monospace;">01 · PERSONALITY</span>
+      <div class="danger-meter">
+        <span style="font-family:'Space Mono',monospace;">DANGER</span>
+        <div class="danger-bars" id="danger-diva"></div>
+        <div class="check-badge" style="display:none;">✓</div>
+      </div>
+    </div>
+    <div class="card-emoji">👑</div>
+    <div class="card-bottom">
+      <div class="card-name">DIVA</div>
+      <div class="card-tagline" style="font-family:'Space Mono',monospace;">MAIN CHARACTER DISORDER</div>
+    </div>
+  </div>
+
+  <div class="mood-card savage selected" data-mood="savage">
+    <div class="card-top">
+      <span class="card-num" style="font-family:'Space Mono',monospace;">02 · PERSONALITY</span>
+      <div class="danger-meter">
+        <span style="font-family:'Space Mono',monospace;">DANGER</span>
+        <div class="danger-bars" id="danger-savage"></div>
+        <div class="check-badge">✓</div>
+      </div>
+    </div>
+    <div class="card-emoji">🔥</div>
+    <div class="card-bottom">
+      <div class="card-name">SAVAGE</div>
+      <div class="card-tagline" style="font-family:'Space Mono',monospace;">ZERO MERCY PROTOCOL</div>
+    </div>
+  </div>
+
+  <div class="mood-card sigma" data-mood="sigma">
+    <div class="card-top">
+      <span class="card-num" style="font-family:'Space Mono',monospace;">03 · PERSONALITY</span>
+      <div class="danger-meter">
+        <span style="font-family:'Space Mono',monospace;">DANGER</span>
+        <div class="danger-bars" id="danger-sigma"></div>
+        <div class="check-badge" style="display:none;">✓</div>
+      </div>
+    </div>
+    <div class="card-emoji">😶</div>
+    <div class="card-bottom">
+      <div class="card-name">SIGMA</div>
+      <div class="card-tagline" style="font-family:'Space Mono',monospace;">LONE WOLF SUPREMACY</div>
+    </div>
+  </div>
+
+  <div class="mood-card indian-parents" data-mood="indian-parents">
+    <div class="card-top">
+      <span class="card-num" style="font-family:'Space Mono',monospace;">04 · PERSONALITY</span>
+      <div class="danger-meter">
+        <span style="font-family:'Space Mono',monospace;">DANGER</span>
+        <div class="danger-bars" id="danger-indian-parents"></div>
+        <div class="check-badge" style="display:none;">✓</div>
+      </div>
+    </div>
+    <div class="card-emoji">🪔</div>
+    <div class="card-bottom">
+      <div class="card-name">INDIAN PARENTS</div>
+      <div class="card-tagline" style="font-family:'Space Mono',monospace;">SHARMA JI KA BETA ENERGY</div>
+    </div>
+  </div>
+
+  <div class="mood-card pookie" data-mood="pookie">
+    <div class="card-top">
+      <span class="card-num" style="font-family:'Space Mono',monospace;">05 · PERSONALITY</span>
+      <div class="danger-meter">
+        <span style="font-family:'Space Mono',monospace;">DANGER</span>
+        <div class="danger-bars" id="danger-pookie"></div>
+        <div class="check-badge" style="display:none;">✓</div>
+      </div>
+    </div>
+    <div class="card-emoji">🩷</div>
+    <div class="card-bottom">
+      <div class="card-name">POOKIE</div>
+      <div class="card-tagline" style="font-family:'Space Mono',monospace;">SWEET BUT STABBY</div>
+    </div>
+  </div>
+
+  <div class="mood-card iced" data-mood="iced">
+    <div class="card-top">
+      <span class="card-num" style="font-family:'Space Mono',monospace;">06 · PERSONALITY</span>
+      <div class="danger-meter">
+        <span style="font-family:'Space Mono',monospace;">DANGER</span>
+        <div class="danger-bars" id="danger-iced"></div>
+        <div class="check-badge" style="display:none;">✓</div>
+      </div>
+    </div>
+    <div class="card-emoji">🧊</div>
+    <div class="card-bottom">
+      <div class="card-name">ICED</div>
+      <div class="card-tagline" style="font-family:'Space Mono',monospace;">ABSOLUTE ZERO EMOTION</div>
+    </div>
+  </div>
+
 </div>
 
-<div class="mood-card" data-mood="Indian Parents">
-<div class="emoji">🩴</div>
-<h2>Indian Parents</h2>
+<div class="personality-panel" id="personality-panel">
+  <div class="panel-top">
+    <div class="panel-avatar" id="panel-emoji">🔥</div>
+    <div class="panel-info">
+      <div class="panel-name">
+        <span id="panel-name">SAVAGE</span>
+        <span id="panel-traits">
+          <span class="trait-badge">BRUTAL</span>
+          <span class="trait-badge">UNFILTERED</span>
+          <span class="trait-badge">DIRECT</span>
+        </span>
+      </div>
+      <p class="panel-desc" id="panel-desc">Raw, unfiltered, zero mercy. Says the thing everyone else was too scared to say.</p>
+      <p class="panel-quote" id="panel-quote">"No sugarcoating. Just the truth you've been avoiding."</p>
+    </div>
+  </div>
+  <hr class="panel-divider">
+  <div class="intensity-row">
+    <div class="intensity-left">
+      <div class="intensity-label" style="font-family:'Space Mono',monospace;">ROAST INTENSITY</div>
+      <input type="range" class="roast-slider" id="roast-slider" min="1" max="10" value="7">
+      <div class="slider-labels" style="font-family:'Space Mono',monospace;">
+        <span>MILD</span><span>MEDIUM</span><span>SPICY</span><span>NUCLEAR</span>
+      </div>
+    </div>
+    <div class="intensity-right">
+      <div>
+        <div class="intensity-val" style="font-family:'Space Mono',monospace;"><span id="intensity-val">7</span><small> / 10</small></div>
+        <div class="intensity-level" style="font-family:'Space Mono',monospace;" id="intensity-level">WELL DONE</div>
+      </div>
+      <button class="btn-begin" id="begin-btn">BEGIN ROASTING →</button>
+    </div>
+  </div>
 </div>
 
-<div class="mood-card" data-mood="Sigma">
-<div class="emoji">🗿</div>
-<h2>Sigma</h2>
-</div>
+<footer class="footer">
+  <div><div class="footer-brand">COOKEDGPT</div><div class="footer-tagline">Serve cooked. Built different.</div></div>
+  <div class="footer-links"><a href="#">TWITTER</a><a href="#">DISCORD</a><a href="#">PRIVACY</a></div>
+</footer>
 
-<div class="mood-card" data-mood="Pookie">
-<div class="emoji">🎀</div>
-<h2>Pookie</h2>
-</div>
-
-<div class="mood-card" data-mood="Chaotic">
-<div class="emoji">🤪</div>
-<h2>Chaotic</h2>
-</div>
-
-<div class="mood-card" data-mood="Iced">
-<div class="emoji">🥶</div>
-<h2>Iced</h2>
-</div>
-
-<div class="intensity-box">
-
-<h3>ROAST INTENSITY</h3>
-
-<input type="range" id="intensity" min="1" max="10" value="5">
-
-<div class="intensity-level" id="intensityText">
-Medium Chaos 🌶️
-</div>
-
-</div>
-
-
-</div>
-
-<button id="startCooking" class="confirm-btn">
-CONFIRM MOOD
-</button>
-
-</div>
-
-<script>
-
-let selectedMood = "Savage";
-
-const moodCards =
-document.querySelectorAll(".mood-card");
-
-moodCards.forEach(card => {
-
-card.addEventListener("click", () => {
-
-moodCards.forEach(c =>
-c.classList.remove("active")
-);
-
-card.classList.add("active");
-
-selectedMood = card.dataset.mood;
-
-});
-
-});
-
-document
-.getElementById("startCooking")
-.addEventListener("click", () => {
-
-localStorage.setItem(
-"mood",
-selectedMood
-);
-
-window.location.href = "/chatpage";
-
-});
-
-</script>
-
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
-
 </html>
