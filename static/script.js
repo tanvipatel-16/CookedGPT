@@ -175,7 +175,8 @@ function sendMessage(customMessage = null){
 
     body:JSON.stringify({
       message:text,
-      mood:localStorage.getItem("mood")
+      mood:localStorage.getItem("mood"),
+      intensity:localstorage.getItem("intensity")||5
     })
 
   })
@@ -301,9 +302,10 @@ if(input){
 
   input.addEventListener("keypress", function(e){
 
-    if(e.key === "Enter"){
-      sendMessage();
-    }
+   if(e.key === "Enter"){
+   e.preventDefault();
+   sendMessage();
+}
 
   });
 
