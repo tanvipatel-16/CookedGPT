@@ -28,7 +28,7 @@ def chat():
 
     data = request.get_json()
 
-   user_message = data.get("message")
+    user_message = data.get("message")
 
     mood = data.get("mood", "Savage")
 
