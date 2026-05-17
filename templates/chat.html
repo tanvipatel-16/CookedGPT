@@ -1,86 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>CookedGPT Chat</title>
-
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CookedGPT Chat</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body class="chat-body">
 
-<div class="chat-app">
+<div class="chat-layout">
 
-  <!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
 
-  <aside class="sidebar" id="sidebar">
+<h1>CookedGPT</h1>
 
-    <div class="sidebar-top">
+<button id="newChat">+ New Chat</button>
 
-      <h2>CookedGPT</h2>
-
-      <button id="newChat">
-        + New Chat
-      </button>
-
-    </div>
-
-    <div class="chat-history" id="chatHistory"></div>
-
-  </aside>
-
-  <!-- MAIN -->
-
-  <main class="chat-main">
-
-    <div class="mobile-top">
-
-      <button id="menuBtn">
-        ☰
-      </button>
-
-      <span>CookedGPT</span>
-
-    </div>
-
-    <div class="messages" id="messages">
-
-      <div class="welcome-chat">
-
-        <h1>CookedGPT</h1>
-
-        <p>
-          emotionally unstable AI assistant
-        </p>
-
-      </div>
-
-    </div>
-
-    <div class="chat-input">
-
-      <input
-        type="text"
-        id="messageInput"
-        placeholder="Ask anything..."
-      >
-
-      <button id="sendBtn">
-        ↑
-      </button>
-
-    </div>
-
-  </main>
+<div id="chatHistory"></div>
 
 </div>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+<div class="chat-main">
 
-</body>
+<div class="topbar">
+
+<button id="menuBtn">☰</button>
+
+<div class="current-mood">
+Mood: <span id="moodName"></span>
+</div>
+
+</div>
+
 </html>
