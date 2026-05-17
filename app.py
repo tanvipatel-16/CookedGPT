@@ -74,7 +74,7 @@ def chat_message():
 
     try:
         response = client.chat.completions.create(
-            model="model="llama-3.3-70b-versatile"",
+            model="llama-3.3-70b-versatile",
             max_tokens=300,
             messages=[
                 {"role": "system", "content": system_prompt},
