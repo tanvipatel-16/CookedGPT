@@ -1,62 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Choose Mood</title>
-
+  <title>Moods</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
+<body class="mood-body">
 
-<body class="setup-body">
+<div class="mood-container">
 
-<div class="setup-container">
+<h1>CHOOSE YOUR CHAOS MOOD</h1>
 
-  <h1>Select Your Chaos Mood</h1>
+<div class="moods-grid">
 
-  <div class="moods">
+<div class="mood-card active" data-mood="Savage">
+  <div class="emoji">😈</div>
+  <h2>Savage</h2>
+</div>
 
-    <div class="mood-card active" data-mood="Savage">
-      😈 Savage
-    </div>
+<div class="mood-card" data-mood="Indian Parents">
+  <div class="emoji">🩴</div>
+  <h2>Indian Parents</h2>
+</div>
 
-    <div class="mood-card" data-mood="Indian Parents">
-      👨‍👩‍👧 Indian Parents
-    </div>
+<div class="mood-card" data-mood="Sigma">
+  <div class="emoji">🗿</div>
+  <h2>Sigma</h2>
+</div>
 
-    <div class="mood-card" data-mood="Sigma">
-      🗿 Sigma
-    </div>
+<div class="mood-card" data-mood="Pookie">
+  <div class="emoji">🎀</div>
+  <h2>Pookie</h2>
+</div>
 
-    <div class="mood-card" data-mood="Pookie">
-      🎀 Pookie
-    </div>
+<div class="mood-card" data-mood="Chaotic">
+  <div class="emoji">🤪</div>
+  <h2>Chaotic</h2>
+</div>
 
-    <div class="mood-card" data-mood="Chaotic">
-      ⚡ Chaotic
-    </div>
+<div class="mood-card" data-mood="Iced">
+  <div class="emoji">🥶</div>
+  <h2>Iced</h2>
+</div>
 
-    <div class="mood-card" data-mood="Iced">
-      ❄️ Iced
-    </div>
+</div>
 
-  </div>
-
-  <div class="slider-box">
-
-    <label>Roast Intensity</label>
-
-    <input type="range" min="1" max="10" value="5">
-
-  </div>
-
-  <button id="startCooking">
-    START COOKING 🔥
-  </button>
+<button id="startCooking" class="confirm-btn">
+CONFIRM MOOD
+</button>
 
 </div>
 
