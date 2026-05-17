@@ -1,276 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CookedGPT Chat</title>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
-body{
-background:#05010d;
-color:white;
-height:100vh;
-overflow:hidden;
-}
-
-.chat-layout{
-display:flex;
-height:100vh;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-width:280px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(12px);
-border-right:1px solid rgba(255,255,255,0.08);
-padding:25px;
-overflow:auto;
-transition:0.3s;
-}
-
-.sidebar h1{
-margin-bottom:25px;
-color:#f5d0fe;
-}
-
-#newChat{
-width:100%;
-padding:15px;
-border:none;
-border-radius:18px;
-background:linear-gradient(90deg,#9333ea,#ec4899);
-color:white;
-font-size:16px;
-cursor:pointer;
-margin-bottom:30px;
-}
-
-.history-item{
-padding:14px;
-border-radius:15px;
-background:rgba(255,255,255,0.05);
-margin-bottom:12px;
-cursor:pointer;
-}
-
-/* MAIN */
-
-.chat-main{
-flex:1;
-display:flex;
-flex-direction:column;
-}
-
-.topbar{
-padding:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:1px solid rgba(255,255,255,0.08);
-}
-
-#menuBtn{
-display:none;
-background:none;
-border:none;
-color:white;
-font-size:26px;
-cursor:pointer;
-}
-
-.messages{
-flex:1;
-overflow:auto;
-padding:30px;
-}
-
-.welcome-chat{
-text-align:center;
-margin-top:100px;
-}
-
-.welcome-chat h1{
-font-size:70px;
-color:#f5d0fe;
-text-shadow:0 0 25px #d946ef;
-margin-bottom:15px;
-}
-
-.msg{
-display:flex;
-margin-bottom:25px;
-}
-
-.user-msg{
-justify-content:flex-end;
-}
-
-.bubble{
-max-width:75%;
-padding:18px 22px;
-border-radius:24px;
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.08);
-line-height:1.7;
-}
-
-.user-msg .bubble{
-background:linear-gradient(90deg,#9333ea,#ec4899);
-}
-
-.chat-input{
-display:flex;
-padding:20px;
-gap:15px;
-border-top:1px solid rgba(255,255,255,0.08);
-}
-
-.chat-input input{
-flex:1;
-padding:18px;
-border:none;
-outline:none;
-border-radius:20px;
-background:rgba(255,255,255,0.06);
-color:white;
-font-size:16px;
-}
-
-#sendBtn{
-width:60px;
-border:none;
-border-radius:18px;
-background:linear-gradient(90deg,#9333ea,#ec4899);
-color:white;
-font-size:20px;
-cursor:pointer;
-}
-
-.regen-btn{
-margin-top:15px;
-background:none;
-border:none;
-color:#d946ef;
-cursor:pointer;
-}
-
-@media(max-width:850px){
-
-.sidebar{
-position:fixed;
-left:-100%;
-top:0;
-height:100%;
-z-index:1000;
-}
-
-.sidebar.show{
-left:0;
-}
-
-#menuBtn{
-display:block;
-}
-
-.messages{
-padding:15px;
-}
-
-.bubble{
-max-width:90%;
-}
-
-}
-
-</style>
-
+<title>CookedGPT — Chat</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>body{overflow:hidden;height:100vh;}</style>
 </head>
+<body class="chat-page">
 
-<body>
+<div id="sidebar-overlay" class="sidebar-overlay"></div>
 
 <div class="chat-layout">
 
-<!-- SIDEBAR -->
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-logo"><div class="logo-icon">C</div>COOKEDGPT</div>
+      <a href="/moods" class="btn-new-cook">+ NEW COOK</a>
+    </div>
+    <div class="sidebar-search">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" placeholder="Search history">
+      </div>
+    </div>
+    <div class="sidebar-history">
+      <div class="history-section-label" style="font-family:'Space Mono',monospace;">RECENT</div>
+      <div class="history-item active"><span class="history-emoji" id="sidebar-history-emoji">🔥</span><span class="history-text">Why am I like this</span><span class="history-time" style="font-family:'Space Mono',monospace;">2M</span></div>
+      <div class="history-item"><span class="history-emoji">👑</span><span class="history-text">Roast my Spotify Wr...</span><span class="history-time" style="font-family:'Space Mono',monospace;">1H</span></div>
+      <div class="history-item"><span class="history-emoji">🧊</span><span class="history-text">Be honest about my...</span><span class="history-time" style="font-family:'Space Mono',monospace;">3H</span></div>
+      <div class="history-item"><span class="history-emoji">😶</span><span class="history-text">My LinkedIn bio...</span><span class="history-time" style="font-family:'Space Mono',monospace;">YESTERDAY</span></div>
+      <div class="history-item"><span class="history-emoji">🩷</span><span class="history-text">Pookie mode test</span><span class="history-time" style="font-family:'Space Mono',monospace;">2D</span></div>
+      <div class="history-item"><span class="history-emoji">🪔</span><span class="history-text">Indian parents roast</span><span class="history-time" style="font-family:'Space Mono',monospace;">4D</span></div>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="personality-section-label" style="font-family:'Space Mono',monospace;">PERSONALITY</div>
+      <div class="personality-switcher" onclick="window.location.href='/moods'">
+        <div class="personality-left">
+          <span class="personality-emoji" id="sidebar-persona-emoji">🔥</span>
+          <div>
+            <span class="personality-name" id="sidebar-persona-name">SAVAGE</span>
+            <span class="personality-switch-label" style="font-family:'Space Mono',monospace;">SWITCH</span>
+          </div>
+        </div>
+        <span class="personality-arrow">⌄</span>
+      </div>
+      <div class="user-card">
+        <div class="user-left">
+          <div class="user-avatar">Y</div>
+          <div>
+            <div class="user-name">You · Free</div>
+            <div class="user-cooks" style="font-family:'Space Mono',monospace;">3 COOKS LEFT TODAY</div>
+          </div>
+        </div>
+        <button class="user-settings">⚙️</button>
+      </div>
+    </div>
+  </aside>
 
-<div class="sidebar" id="sidebar">
+  <!-- MAIN CHAT -->
+  <main class="chat-main">
+    <div class="chat-topbar">
+      <div class="topbar-left">
+        <button class="btn-sidebar-toggle" id="sidebar-toggle">☰</button>
+        <div class="active-persona">
+          <span class="active-persona-emoji" id="active-emoji">🔥</span>
+          <div>
+            <div class="active-persona-name">
+              <span id="active-name">SAVAGE</span>
+              <span class="heat-badge" id="active-heat">🔥 7/10</span>
+            </div>
+            <div class="active-persona-sub" id="active-sub">zero mercy protocol</div>
+          </div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn-upgrade">⚡ UPGRADE</button>
+        <button class="btn-icon">⚙️</button>
+      </div>
+    </div>
 
-<h1>CookedGPT</h1>
+    <div class="chat-messages" id="chat-messages">
+      <div class="session-header">
+        <div class="session-emoji" id="session-emoji">🔥</div>
+        <div class="session-label" style="font-family:'Space Mono',monospace;">
+          SESSION · <span class="purple" id="session-name">SAVAGE</span> · <span class="purple" id="session-heat">7/10</span>
+        </div>
+        <div class="session-sub">Anything you say can and will be used against you.</div>
+      </div>
+      <div class="message-wrap">
+        <div class="msg-avatar" id="intro-avatar">🔥</div>
+        <div class="msg-bubble">
+          <p class="msg-text" id="intro-msg">Connection established. Persona loaded. Ready when you are.</p>
+          <p class="msg-time" style="font-family:'Space Mono',monospace;">JUST NOW</p>
+        </div>
+      </div>
+    </div>
 
-<button id="newChat">
-+ New Chat
-</button>
-
-<div id="chatHistory"></div>
-
-</div>
-
-<!-- MAIN -->
-
-<div class="chat-main">
-
-<div class="topbar">
-
-<button id="menuBtn">
-☰
-</button>
-
-<div>
-Mood:
-<span id="moodText"></span>
-</div>
-
-</div>
-
-<div class="messages" id="messages">
-
-<div class="welcome-chat">
-
-<h1>CookedGPT</h1>
-
-<p>
-emotionally unstable AI assistant
-</p>
-
-</div>
-
-</div>
-
-<div class="chat-input">
-
-<input
-type="text"
-id="messageInput"
-placeholder="Type your message..."
->
-
-<button id="sendBtn">
-➤
-</button>
-
-</div>
-
-</div>
-
+    <div class="chat-input-area">
+      <div class="quick-prompts">
+        <button class="quick-btn">Roast my Spotify</button>
+        <button class="quick-btn">Be brutally honest</button>
+        <button class="quick-btn">What's my biggest flaw?</button>
+        <button class="quick-btn">Rate my life choices</button>
+      </div>
+      <div class="input-box">
+        <button class="input-icon">🖼️</button>
+        <button class="input-icon">😊</button>
+        <input type="text" class="chat-text-input" id="chat-input" placeholder="Say something..." autocomplete="off">
+        <button class="input-icon">🎤</button>
+        <button class="btn-send" id="send-btn">➤</button>
+      </div>
+      <div class="chat-disclaimer" style="font-family:'Space Mono',monospace;">✦ COOKEDGPT MAY PRODUCE DEVASTATINGLY ACCURATE OUTPUT</div>
+    </div>
+  </main>
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
-
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const p = new URLSearchParams(window.location.search);
+  const mk = p.get('mood') || 'savage';
+  const EMOJIS = {diva:'👑',savage:'🔥',sigma:'😶','indian-parents':'🪔',pookie:'🩷',iced:'🧊'};
+  const NAMES = {diva:'DIVA',savage:'SAVAGE',sigma:'SIGMA','indian-parents':'INDIAN PARENTS',pookie:'POOKIE',iced:'ICED'};
+  const INTROS = {
+    diva: "Connection established. DIVA loaded. Darling, let's see what mess you've made of your life.",
+    savage: "Connection established. SAVAGE loaded. No mercy mode activated. Talk.",
+    sigma: "...",
+    'indian-parents': "Beta, we are here. And we have some questions about your life choices.",
+    pookie: "Hiiii pookie! 🩷 Ready to have a little chat? This is going to be so fun for me.",
+    iced: "."
+  };
+  const e = EMOJIS[mk]||'🔥';
+  const n = NAMES[mk]||'SAVAGE';
+  // Set all emojis
+  ['sidebar-history-emoji','intro-avatar'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=e;});
+  const introMsg = document.getElementById('intro-msg');
+  if(introMsg) introMsg.textContent = INTROS[mk] || "Ready when you are.";
+});
+</script>
 </body>
-
 </html>
