@@ -1,75 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CookedGPT</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body class="landing-body">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CookedGPT</title>
 
-<nav class="navbar">
-  <div class="logo">
-    <div class="logo-box">C</div>
-    <span>COOKEDGPT</span>
-  </div>
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
 
-  <div class="nav-links">
-    <a href="#">How it works</a>
-    <a href="/">Moods</a>
-    <a href="#">Manifesto</a>
-  </div>
+body{
+background:#05010d;
+color:white;
+overflow-x:hidden;
+}
 
-  <a href="/moods" class="launch-btn">LAUNCH →</a>
-</nav>
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 60px;
+position:relative;
+z-index:10;
+}
 
-<section class="hero">
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-weight:bold;
+font-size:22px;
+}
 
-  <div class="hero-left">
-    <img src="{{ url_for('static', filename='cooker.png') }}" class="cooker-img">
-  </div>
+.logo-box{
+width:42px;
+height:42px;
+border-radius:14px;
+background:#9333ea;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+box-shadow:0 0 25px #d946ef;
+}
 
-  <div class="hero-center">
+.nav-links{
+display:flex;
+gap:35px;
+}
 
-    <div class="badge">NOW SERVING · V2.0</div>
+.nav-links a{
+text-decoration:none;
+color:#ddd;
+}
 
-    <h1>COOKEDGPT</h1>
+.launch-btn{
+text-decoration:none;
+color:white;
+padding:14px 30px;
+border-radius:999px;
+background:linear-gradient(90deg,#9333ea,#ec4899);
+font-weight:bold;
+box-shadow:0 0 20px #d946ef;
+}
 
-    <h2>
-      THE AI THAT DESTROYS<br>
-      YOUR EMOTIONAL STABILITY
-    </h2>
-
-    <p>
-      Pick a chaos mood and get emotionally cooked.
-    </p>
-
-    <a href="/moods" class="start-btn">
-      OPEN YOUR MIND 🧠
-    </a>
-
-  </div>
-
-  <div class="hero-right">
-
-    <div class="step-card">
-      <h3>STEP 01</h3>
-      <p>Select your chaos mood</p>
-    </div>
-
-    <div class="step-card">
-      <h3>STEP 02</h3>
-      <p>Increase roast intensity</p>
-    </div>
-
-    <div class="step-card">
-      <h3>STEP 03</h3>
-      <p>Get emotionally cooked</p>
-    </div>
-
-  </div>
-
-</section>
-
-</body>
+.hero{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
 </html>
