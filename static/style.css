@@ -1,315 +1,45 @@
-/* MOODS */
-
-let selectedMood = "Savage";
-
-const moodCards = document.querySelectorAll(".mood-card");
-
-moodCards.forEach(card => {
-
-  card.addEventListener("click", () => {
-
-    moodCards.forEach(c => c.classList.remove("active"));
-
-    card.classList.add("active");
-
-    selectedMood = card.dataset.mood;
-
-  });
-
-});
-
-/* START */
-
-const startBtn = document.getElementById("startCooking");
-
-if(startBtn){
-
-  startBtn.addEventListener("click", () => {
-
-    localStorage.setItem("mood", selectedMood);
-
-    window.location.href = "/chatpage";
-
-  });
-
+*{
+outline:none;
+color:white;
 }
 
-/* MOBILE SIDEBAR */
-
-const menuBtn = document.getElementById("menuBtn");
-
-const sidebar = document.getElementById("sidebar");
-
-if(menuBtn){
-
-  menuBtn.addEventListener("click", () => {
-
-    sidebar.classList.toggle("show");
-
-  });
-
+.regen-btn{
+margin-top:15px;
+background:none;
+border:none;
+color:#d946ef;
+cursor:pointer;
 }
 
-/* CHAT */
+@media(max-width:900px){
 
-const sendBtn = document.getElementById("sendBtn");
-
-const input = document.getElementById("messageInput");
-
-const messages = document.getElementById("messages");
-
-const history = document.getElementById("chatHistory");
-
-let chats = [];
-
-let lastUserMessage = "";
-
-/* LOAD SAVED CHATS */
-
-window.onload = () => {
-
-  const saved =
-    localStorage.getItem("cookedChats");
-
-  if(saved){
-
-    messages.innerHTML = saved;
-
-  }
-
-};
-
-/* HISTORY */
-
-function addHistory(title){
-
-  const item = document.createElement("div");
-
-  item.className = "history-item";
-
-  item.innerText = title;
-
-  history.prepend(item);
-
+.hero{
+grid-template-columns:1fr;
 }
 
-/* MAIN SEND */
-
-function sendMessage(customMessage = null){
-
-  const text = customMessage || input.value.trim();
-
-  if(text === "") return;
-
-  lastUserMessage = text;
-
-  document.querySelector(".welcome-chat")?.remove();
-
-  /* USER MESSAGE */
-
-  if(!customMessage){
-
-    const userDiv = document.createElement("div");
-
-    userDiv.className = "msg user-msg";
-
-    userDiv.innerHTML = `
-      <div class="bubble">
-        ${text}
-        <button class="edit-btn">✏️</button>
-      </div>
-    `;
-
-    messages.appendChild(userDiv);
-
-    chats.push(text);
-
-    if(chats.length === 1){
-      addHistory(text.substring(0,25));
-    }
-
-  }
-
-  input.value = "";
-
-  /* SAVE */
-
-  localStorage.setItem(
-    "cookedChats",
-    messages.innerHTML
-  );
-
-  /* THINKING */
-
-  const typing = document.createElement("div");
-
-  typing.className = "msg ai-msg";
-
-  typing.innerHTML = `
-    <div class="bubble">
-      Thinking...
-    </div>
-  `;
-
-  messages.appendChild(typing);
-
-  messages.scrollTop = messages.scrollHeight;
-
-  /* API */
-
-  fetch("/chat", {
-
-    method:"POST",
-
-    headers:{
-      "Content-Type":"application/json"
-    },
-
-    body:JSON.stringify({
-      message:text,
-      mood:localStorage.getItem("mood")
-    })
-
-  })
-
-  .then(res => res.json())
-
-  .then(data => {
-
-    typing.remove();
-
-    const aiDiv = document.createElement("div");
-
-    aiDiv.className = "msg ai-msg";
-
-    const bubble = document.createElement("div");
-
-    bubble.className = "bubble";
-
-    aiDiv.appendChild(bubble);
-
-    messages.appendChild(aiDiv);
-
-    let aiText = data.reply;
-
-    let index = 0;
-
-    /* TYPING EFFECT */
-
-    function typeEffect(){
-
-      if(index < aiText.length){
-
-        bubble.innerHTML = marked.parse(
-          aiText.substring(0,index)
-        );
-
-        index++;
-
-        messages.scrollTop = messages.scrollHeight;
-
-        setTimeout(typeEffect, 8);
-
-      }
-
-      else{
-
-        bubble.innerHTML += `
-          <button class="regen-btn">
-            ↻ Regenerate
-          </button>
-        `;
-
-        const regenBtn =
-          bubble.querySelector(".regen-btn");
-
-        regenBtn.addEventListener("click", () => {
-
-          aiDiv.remove();
-
-          sendMessage(lastUserMessage);
-
-        });
-
-        /* SAVE */
-
-        localStorage.setItem(
-          "cookedChats",
-          messages.innerHTML
-        );
-
-      }
-
-    }
-
-    typeEffect();
-
-  })
-
-  .catch(error => {
-
-    typing.remove();
-
-    const errorDiv = document.createElement("div");
-
-    errorDiv.className = "msg ai-msg";
-
-    errorDiv.innerHTML = `
-      <div class="bubble">
-        Error connecting to AI.
-      </div>
-    `;
-
-    messages.appendChild(errorDiv);
-
-  });
-
+.hero-center h1{
+font-size:55px;
 }
 
-/* SEND BUTTON */
-
-if(sendBtn){
-
-  sendBtn.addEventListener("click", sendMessage);
-
+.sidebar{
+position:fixed;
+left:-100%;
+top:0;
+height:100%;
+transition:0.3s;
+z-index:1000;
 }
 
-/* ENTER KEY */
-
-if(input){
-
-  input.addEventListener("keypress", function(e){
-
-    if(e.key === "Enter"){
-      sendMessage();
-    }
-
-  });
-
+.sidebar.show{
+left:0;
 }
 
-/* NEW CHAT */
+.messages{
+padding:15px;
+}
 
-const newChat = document.getElementById("newChat");
-
-if(newChat){
-
-  newChat.addEventListener("click", () => {
-
-    localStorage.removeItem("cookedChats");
-
-    messages.innerHTML = `
-      <div class="welcome-chat">
-
-        <h1>CookedGPT</h1>
-
-        <p>
-          emotionally unstable AI assistant
-        </p>
-
-      </div>
-    `;
-
-  });
+.bubble{
+max-width:90%;
+}
 
 }
