@@ -1,143 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>CookedGPT</title>
-
-  <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='style.css') }}"
-  >
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+<body class="landing-body">
 
-<body class="landing-page">
+<nav class="navbar">
+  <div class="logo">
+    <div class="logo-box">C</div>
+    <span>COOKEDGPT</span>
+  </div>
 
-  <!-- NAVBAR -->
+  <div class="nav-links">
+    <a href="#">How it works</a>
+    <a href="/">Moods</a>
+    <a href="#">Manifesto</a>
+  </div>
 
-  <nav class="navbar">
+  <a href="/moods" class="launch-btn">LAUNCH →</a>
+</nav>
 
-    <div class="logo">
+<section class="hero">
 
-      <div class="logo-box">C</div>
+  <div class="hero-left">
+    <img src="{{ url_for('static', filename='cooker.png') }}" class="cooker-img">
+  </div>
 
-      <span>COOKEDGPT</span>
+  <div class="hero-center">
 
-    </div>
+    <div class="badge">NOW SERVING · V2.0</div>
 
-    <div class="nav-links">
+    <h1>COOKEDGPT</h1>
 
-      <a href="#">How it works</a>
+    <h2>
+      THE AI THAT DESTROYS<br>
+      YOUR EMOTIONAL STABILITY
+    </h2>
 
-      <a href="#">Moods</a>
+    <p>
+      Pick a chaos mood and get emotionally cooked.
+    </p>
 
-      <a href="#">Manifesto</a>
-
-    </div>
-
-    <a href="/chatpage" class="launch-btn">
-      LAUNCH →
+    <a href="/moods" class="start-btn">
+      OPEN YOUR MIND 🧠
     </a>
 
-  </nav>
+  </div>
 
-  <!-- HERO -->
+  <div class="hero-right">
 
-  <section class="hero">
-
-    <div class="hero-left">
-
-      <img
-        src="{{ url_for('static', filename='cooker.png') }}"
-        class="cooker-img"
-      >
-
+    <div class="step-card">
+      <h3>STEP 01</h3>
+      <p>Select your chaos mood</p>
     </div>
 
-    <div class="hero-center">
-
-      <div class="badge">
-        ● NOW SERVING · V2.0
-      </div>
-
-      <h1 class="hero-title">
-        COOKEDGPT
-      </h1>
-
-      <p class="hero-subtitle">
-
-        THE AI THAT DESTROYS
-        YOUR EMOTIONAL STABILITY
-
-      </p>
-
-      <p class="hero-text">
-
-        An unhinged roast engine trained on chaos.
-        Pick a mood, set the heat,
-        and let it cook.
-
-      </p>
-
-      <a href="/chatpage" class="start-btn">
-
-        OPEN YOUR MIND 🧠
-
-      </a>
-
+    <div class="step-card">
+      <h3>STEP 02</h3>
+      <p>Increase roast intensity</p>
     </div>
 
-    <div class="hero-right">
-
-      <div class="step-card">
-
-        <h3>STEP 01</h3>
-
-        <h2>Select your chaos mood</h2>
-
-        <p>
-          Savage, Sigma, Pookie,
-          Indian Parents, Iced,
-          or Chaotic.
-        </p>
-
-      </div>
-
-      <div class="step-card">
-
-        <h3>STEP 02</h3>
-
-        <h2>Increase roast intensity</h2>
-
-        <p>
-          From light jokes
-          to emotional damage.
-        </p>
-
-      </div>
-
-      <div class="step-card">
-
-        <h3>STEP 03</h3>
-
-        <h2>Get emotionally cooked</h2>
-
-        <p>
-          The AI remembers nothing.
-          But the trauma stays forever.
-        </p>
-
-      </div>
-
+    <div class="step-card">
+      <h3>STEP 03</h3>
+      <p>Get emotionally cooked</p>
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 </body>
-
 </html>
