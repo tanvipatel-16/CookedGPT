@@ -1,63 +1,65 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap');
+
+.mood-container h1{
+font-size:42px;
 }
 
-body{
-background:#05010d;
-color:white;
+.emoji{
+font-size:48px;
 }
 
-a{
-text-decoration:none;
-color:white;
+.mood-card h2{
+font-size:20px;
+}
+
+.sidebar{
+position:fixed;
+left:-100%;
+top:0;
+height:100%;
+width:260px;
+transition:0.3s;
+z-index:999;
+}
+
+.sidebar.show{
+left:0;
+}
+
+#menuBtn{
+display:block;
+}
+
+.messages{
+padding:15px;
+padding-bottom:120px;
+}
+
+.bubble{
+max-width:92%;
+font-size:15px;
+padding:15px 18px;
+}
+
+.chat-input{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+margin:10px;
+padding:14px;
+}
+
+.chat-input input{
+font-size:16px;
+}
+
+.welcome-chat h1{
+font-size:44px;
 }
 
 .navbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:25px 60px;
+padding:20px;
 }
 
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
-font-weight:bold;
-}
-
-.logo-box{
-width:40px;
-height:40px;
-border-radius:12px;
-background:#8b5cf6;
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 0 20px #d946ef;
-}
-
-.nav-links{
-display:flex;
-gap:30px;
-}
-
-.launch-btn,
-.start-btn,
-.confirm-btn,
-#sendBtn,
-#newChat{
-background:linear-gradient(90deg,#9333ea,#ec4899);
-border:none;
-color:white;
-padding:14px 28px;
-border-radius:999px;
-cursor:pointer;
-}
-
-.hero{
-display:grid;
 }
