@@ -334,3 +334,28 @@ if(newChat){
   });
 
 }
+const intensity = document.getElementById("intensity");
+const intensityText = document.getElementById("intensityText");
+
+if(intensity){
+
+intensity.addEventListener("input",()=>{
+
+const val = intensity.value;
+
+if(val <= 3){
+intensityText.innerText = "Light Roast ☕";
+}
+else if(val <= 7){
+intensityText.innerText = "Medium Chaos 🌶️";
+}
+else{
+intensityText.innerText = "Emotional Damage ☠️";
+}
+
+localStorage.setItem("intensity",val);
+
+});
+
+}
+
