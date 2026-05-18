@@ -755,3 +755,35 @@ max-width:300px;
     }
 
 }
+.chat-topbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+width:100%;
+}
+
+.topbar-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.btn-sidebar-toggle{
+width:42px;
+height:42px;
+border:none;
+border-radius:12px;
+background:#141424;
+color:white;
+font-size:22px;
+cursor:pointer;
+}
+
+.sidebar.collapsed{
+width:0 !important;
+min-width:0 !important;
+overflow:hidden;
+opacity:0;
+padding:0 !important;
+}
+
