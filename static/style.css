@@ -693,3 +693,65 @@ max-width:300px;
 .sidebar.hidden{
     transform:translateX(-110%);
 }
+/* TOPBAR LEFT FIX */
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+/* THREE LINES BUTTON */
+.btn-sidebar-toggle{
+    order:-1;
+    margin-right:10px;
+}
+
+/* MOOD DISPLAY BUTTON */
+.mood-display{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    color:white;
+    padding:8px 14px;
+    border-radius:14px;
+    font-size:13px;
+    font-weight:600;
+    backdrop-filter:blur(10px);
+    white-space:nowrap;
+    cursor:pointer;
+}
+
+.mood-display:hover{
+    transform:scale(1.03);
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:320px;
+    transition:0.3s ease;
+    overflow:hidden;
+}
+
+/* COLLAPSED SIDEBAR */
+.sidebar.collapsed{
+    width:0 !important;
+    min-width:0 !important;
+    padding:0 !important;
+    border:none !important;
+    opacity:0;
+}
+
+/* CHAT AREA */
+.chat-main{
+    width:100%;
+    transition:0.3s ease;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    .mood-display{
+        font-size:11px;
+        padding:6px 10px;
+    }
+
+}
