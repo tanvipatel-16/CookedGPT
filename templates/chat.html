@@ -23,95 +23,81 @@
 <div class="chat-layout">
 
   <!-- SIDEBAR -->
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
 
-  <!-- TOP LOGO -->
+    <!-- CLOSE BUTTON (Top Right of Sidebar) -->
+    <button class="sidebar-close-btn" id="sidebar-close">✕</button>
 
-  <div class="sidebar-logo">
-
-    <div class="logo-icon">C</div>
-
-    <span>COOKEDGPT</span>
-
-  </div>
-
-  <!-- PROFILE -->
-
-  <div class="sidebar-profile">
-
-    <img
-      src="https://i.imgur.com/HeIi0wU.png"
-      alt="profile"
-      id="userPhoto"
-    >
-
-    <div>
-      <h4 id="userName">Guest User</h4>
-      <p>emotionally unstable</p>
+    <!-- TOP LOGO -->
+    <div class="sidebar-logo">
+      <div class="logo-icon">C</div>
+      <span>COOKEDGPT</span>
     </div>
 
+    <!-- PROFILE -->
+    <div class="sidebar-profile">
+      <img
+        src="https://i.imgur.com/HeIi0wU.png"
+        alt="profile"
+        id="userPhoto"
+      >
+      <div>
+        <h4 id="userName">Guest User</h4>
+        <p>emotionally unstable</p>
+      </div>
+    </div>
+
+    <!-- NEW COOK -->
+    <button id="newChat" class="new-cook-btn">
+      + New Cook
+    </button>
+
+    <!-- SEARCH -->
+    <div class="search-wrap">
+      <input
+        type="text"
+        placeholder="Search chats..."
+        class="search-history"
+      >
+    </div>
+
+    <!-- CHAT HISTORY -->
+    <div class="chat-history-list" id="chatHistory">
+    </div>
+
+    <!-- SWITCH MOOD -->
+    <a href="/moods" class="switch-mood-btn">
+      Switch Mood
+    </a>
+
+    <!-- LOGOUT -->
+    <button class="logout-btn">
+      Logout
+    </button>
+
   </div>
-
-  <!-- NEW COOK -->
-
-  <button id="newChat" class="new-cook-btn">
-    + New Cook
-  </button>
-
-  <!-- SEARCH -->
-
-  <div class="search-wrap">
-
-    <input
-      type="text"
-      placeholder="Search chats..."
-      class="search-history"
-    >
-
-  </div>
-
-  <!-- CHAT HISTORY -->
-
-  <div class="chat-history-list" id="chatHistory">
-
-  </div>
-
-  <!-- SWITCH MOOD -->
-
-  <a href="/moods" class="switch-mood-btn">
-    Switch Mood
-  </a>
-
-  <!-- LOGOUT -->
-
-  <button class="logout-btn">
-    Logout
-  </button>
-
-</div>
-   
 
   <!-- MAIN CHAT -->
   <main class="chat-main">
     <div class="chat-topbar">
-       <!-- LEFT SIDE WITH THREE-LINE BUTTON -->
-       <div class="topbar-left">
-           <button class="btn-sidebar-toggle" id="sidebar-toggle">
-               ☰
-           </button>
-       </div>
+      <!-- LEFT SIDE WITH THREE-LINE BUTTON -->
+      <div class="topbar-left">
+        <button class="btn-sidebar-toggle" id="sidebar-toggle">
+          ☰
+        </button>
+      </div>
 
-       <!-- RIGHT SIDE - Active Persona Display -->
-       <div class="active-persona">
-           <span class="active-persona-emoji" id="active-emoji">🔥</span>
-           <div>
-               <div class="active-persona-name">
-                   <span id="active-name">SAVAGE</span>
-                   <span class="heat-badge" id="active-heat">🔥 7/10</span>
-               </div>
-               <div class="active-persona-sub" id="active-sub">zero mercy protocol</div>
-           </div>
-       </div>
+      <!-- RIGHT SIDE - Active Persona Display -->
+      <div class="active-persona">
+        <span class="active-persona-emoji" id="active-emoji">🔥</span>
+        <div>
+          <div class="active-persona-name">
+            <span id="active-name">SAVAGE</span>
+            <span class="heat-badge" id="active-heat">🔥 7/10</span>
+          </div>
+          <div class="active-persona-sub" id="active-sub">zero mercy protocol</div>
+        </div>
+      </div>
     </div>
 
     <div class="chat-messages" id="chat-messages">
@@ -168,6 +154,19 @@ document.addEventListener('DOMContentLoaded', () => {
   ['sidebar-history-emoji','intro-avatar'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=e;});
   const introMsg = document.getElementById('intro-msg');
   if(introMsg) introMsg.textContent = INTROS[mk] || "Ready when you are.";
+  
+  // Close button functionality
+  const closeBtn = document.getElementById('sidebar-close');
+  const toggleBtn = document.getElementById('sidebar-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      if (sidebar) sidebar.classList.add('collapsed');
+      if (overlay) overlay.classList.remove('show');
+    });
+  }
 });
 </script>
 </body>
