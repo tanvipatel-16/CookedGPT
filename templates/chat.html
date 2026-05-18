@@ -94,44 +94,24 @@
   <!-- MAIN CHAT -->
   <main class="chat-main">
     <div class="chat-topbar">
-       <!-- Hamburger -->
-    <button id="menuToggle" class="menu-btn">
-        ☰
-    </button>
+       <!-- LEFT SIDE WITH THREE-LINE BUTTON -->
+       <div class="topbar-left">
+           <button class="btn-sidebar-toggle" id="sidebar-toggle">
+               ☰
+           </button>
+       </div>
 
-    <!-- Mood Display -->
-    <button class="mood-display" id="moodDisplay">
-        Mood: Savage • 80%
-    </button>
-    <div class="chat-topbar">
-
-<!-- LEFT SIDE -->
-<div class="topbar-left">
-
-    <button class="btn-sidebar-toggle" id="sidebar-toggle">
-        ☰
-    </button>
-
-    <button class="mood-display" id="moodDisplay">
-        SAVAGE • 🔥 7/10
-    </button>
-
-</div>
-
-<!-- RIGHT SIDE -->
-<div class="active-persona">
- 
-          <span class="active-persona-emoji" id="active-emoji">🔥</span>
-          <div>
-            <div class="active-persona-name">
-              <span id="active-name">SAVAGE</span>
-              <span class="heat-badge" id="active-heat">🔥 7/10</span>
-            </div>
-            <div class="active-persona-sub" id="active-sub">zero mercy protocol</div>
-          </div>
-        </div>
-      </div>
-      
+       <!-- RIGHT SIDE - Active Persona Display -->
+       <div class="active-persona">
+           <span class="active-persona-emoji" id="active-emoji">🔥</span>
+           <div>
+               <div class="active-persona-name">
+                   <span id="active-name">SAVAGE</span>
+                   <span class="heat-badge" id="active-heat">🔥 7/10</span>
+               </div>
+               <div class="active-persona-sub" id="active-sub">zero mercy protocol</div>
+           </div>
+       </div>
     </div>
 
     <div class="chat-messages" id="chat-messages">
@@ -191,4 +171,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-</html> 
+</html>
