@@ -23,91 +23,73 @@
 <div class="chat-layout">
 
   <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-top">
-      <div class="sidebar-logo"><div class="logo-icon">C</div>COOKEDGPT</div>
-      <a href="/moods" class="btn-new-cook">+ NEW COOK</a>
-    </div>
-    <div class="sidebar-top">
+  <div class="sidebar">
+
+  <!-- TOP LOGO -->
+
+  <div class="sidebar-logo">
+
+    <div class="logo-icon">C</div>
+
+    <span>COOKEDGPT</span>
+
+  </div>
+
+  <!-- PROFILE -->
 
   <div class="sidebar-profile">
 
     <img
       src="https://i.imgur.com/HeIi0wU.png"
       alt="profile"
+      id="userPhoto"
     >
 
     <div>
-      <h4>User</h4>
-      <p>online</p>
+      <h4 id="userName">Guest User</h4>
+      <p>emotionally unstable</p>
     </div>
 
   </div>
 
-  <button id="newChat">
-    + New Chat
+  <!-- NEW COOK -->
+
+  <button id="newChat" class="new-cook-btn">
+    + New Cook
+  </button>
+
+  <!-- SEARCH -->
+
+  <div class="search-wrap">
+
+    <input
+      type="text"
+      placeholder="Search chats..."
+      class="search-history"
+    >
+
+  </div>
+
+  <!-- CHAT HISTORY -->
+
+  <div class="chat-history-list" id="chatHistory">
+
+  </div>
+
+  <!-- SWITCH MOOD -->
+
+  <a href="/moods" class="switch-mood-btn">
+    Switch Mood
+  </a>
+
+  <!-- LOGOUT -->
+
+  <button class="logout-btn">
+    Logout
   </button>
 
 </div>
-
-<div class="chat-history-list">
-
-  <div class="history-item active">
-    First Emotional Damage
-  </div>
-
-  <div class="history-item">
-    Indian Parents Roast
-  </div>
-
-  <div class="history-item">
-    Sigma Breakdown
-  </div>
-
-</div>
-
-<button class="logout-btn">
-  Logout
-</button>
-    <div class="sidebar-search">
-      <div class="search-wrap">
-        <span class="search-icon">🔍</span>
-        <input type="text" class="search-input" placeholder="Search history">
-      </div>
-    </div>
-    <div class="sidebar-history">
-      <div class="history-section-label" style="font-family:'Space Mono',monospace;">RECENT</div>
-      <div class="history-item active"><span class="history-emoji" id="sidebar-history-emoji">🔥</span><span class="history-text">Why am I like this</span><span class="history-time" style="font-family:'Space Mono',monospace;">2M</span></div>
-      <div class="history-item"><span class="history-emoji">👑</span><span class="history-text">Roast my Spotify Wr...</span><span class="history-time" style="font-family:'Space Mono',monospace;">1H</span></div>
-      <div class="history-item"><span class="history-emoji">🧊</span><span class="history-text">Be honest about my...</span><span class="history-time" style="font-family:'Space Mono',monospace;">3H</span></div>
-      <div class="history-item"><span class="history-emoji">😶</span><span class="history-text">My LinkedIn bio...</span><span class="history-time" style="font-family:'Space Mono',monospace;">YESTERDAY</span></div>
-      <div class="history-item"><span class="history-emoji">🩷</span><span class="history-text">Pookie mode test</span><span class="history-time" style="font-family:'Space Mono',monospace;">2D</span></div>
-      <div class="history-item"><span class="history-emoji">🪔</span><span class="history-text">Indian parents roast</span><span class="history-time" style="font-family:'Space Mono',monospace;">4D</span></div>
-    </div>
-    <div class="sidebar-bottom">
-      <div class="personality-section-label" style="font-family:'Space Mono',monospace;">PERSONALITY</div>
-      <div class="personality-switcher" onclick="window.location.href='/moods'">
-        <div class="personality-left">
-          <span class="personality-emoji" id="sidebar-persona-emoji">🔥</span>
-          <div>
-            <span class="personality-name" id="sidebar-persona-name">SAVAGE</span>
-            <span class="personality-switch-label" style="font-family:'Space Mono',monospace;">SWITCH</span>
-          </div>
-        </div>
-        <span class="personality-arrow">⌄</span>
-      </div>
-      <div class="user-card">
-        <div class="user-left">
-          <div class="user-avatar">Y</div>
-          <div>
-            <div class="user-name">You · Free</div>
-            <div class="user-cooks" style="font-family:'Space Mono',monospace;">3 COOKS LEFT TODAY</div>
-          </div>
-        </div>
-        <button class="user-settings">⚙️</button>
-      </div>
-    </div>
-  </aside>
+   
 
   <!-- MAIN CHAT -->
   <main class="chat-main">
