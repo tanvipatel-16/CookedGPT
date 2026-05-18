@@ -307,3 +307,177 @@ transition:0.3s;
 .footer a:hover{
 color:#d946ef;
 }
+/* =========================
+LOGIN + PROFILE UI
+========================= */
+
+.account-strip{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:12px;
+margin-top:28px;
+margin-bottom:28px;
+flex-wrap:wrap;
+}
+
+.login-btn,
+.signup-btn{
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.12);
+color:white;
+padding:10px 18px;
+border-radius:999px;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+}
+
+.login-btn:hover,
+.signup-btn:hover{
+transform:translateY(-2px);
+background:rgba(217,70,239,0.2);
+border-color:rgba(217,70,239,0.5);
+}
+
+.profile-mini{
+width:42px;
+height:42px;
+border-radius:50%;
+overflow:hidden;
+border:2px solid #d946ef;
+box-shadow:0 0 20px rgba(217,70,239,0.35);
+}
+
+.profile-mini img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.hidden{
+display:none;
+}
+
+/* =========================
+SIDEBAR PROFILE
+========================= */
+
+.sidebar-top{
+padding:18px;
+border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.sidebar-profile{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:18px;
+}
+
+.sidebar-profile img{
+width:44px;
+height:44px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid #d946ef;
+}
+
+.sidebar-profile h4{
+margin:0;
+font-size:15px;
+color:white;
+font-weight:700;
+}
+
+.sidebar-profile p{
+margin:0;
+font-size:12px;
+color:#9ca3af;
+}
+
+.chat-history-list{
+padding:14px;
+display:flex;
+flex-direction:column;
+gap:10px;
+overflow-y:auto;
+}
+
+.history-item{
+padding:14px;
+border-radius:14px;
+background:rgba(255,255,255,0.05);
+color:#d1d5db;
+font-size:14px;
+cursor:pointer;
+transition:0.3s;
+border:1px solid transparent;
+}
+
+.history-item:hover{
+background:rgba(217,70,239,0.16);
+border-color:rgba(217,70,239,0.3);
+transform:translateX(2px);
+}
+
+.history-item.active{
+background:rgba(217,70,239,0.2);
+color:white;
+border-color:rgba(217,70,239,0.45);
+}
+
+.logout-btn{
+margin:16px;
+padding:12px;
+border-radius:14px;
+background:#111827;
+border:1px solid rgba(255,255,255,0.08);
+color:#ff6b81;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.logout-btn:hover{
+background:#1f2937;
+transform:translateY(-1px);
+}
+
+/* =========================
+MOBILE FIXES
+========================= */
+
+@media(max-width:768px){
+
+.account-strip{
+gap:10px;
+margin-top:22px;
+}
+
+.login-btn,
+.signup-btn{
+padding:9px 15px;
+font-size:13px;
+}
+
+.profile-mini{
+width:38px;
+height:38px;
+}
+
+.history-item{
+font-size:13px;
+padding:12px;
+}
+
+.sidebar-profile img{
+width:40px;
+height:40px;
+}
+
+}
