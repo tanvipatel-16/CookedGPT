@@ -1,170 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5FWYF7L55"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-X5FWYF7L55');
+</script>
 
-  gtag('config', 'G-X5FWYF7L55');
-</script> 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CookedGPT — Chat</title>
+
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<style>body{overflow:hidden;height:100vh;}</style>
+
+<style>
+body{
+overflow:hidden;
+height:100vh;
+}
+</style>
+
 </head>
+
 <body class="chat-page">
 
 <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
 <div class="chat-layout">
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
+<!-- SIDEBAR -->
 
-  <!-- TOP LOGO -->
+<div class="sidebar">
 
-  <div class="sidebar-logo">
+<div class="sidebar-logo">
 
-    <div class="logo-icon">C</div>
+<div class="logo-icon">C</div>
 
-    <span>COOKEDGPT</span>
-
-  </div>
-
-  <!-- PROFILE -->
-
-  <div class="sidebar-profile">
-
-    <img
-      src="https://i.imgur.com/HeIi0wU.png"
-      alt="profile"
-      id="userPhoto"
-    >
-
-    <div>
-      <h4 id="userName">Guest User</h4>
-      <p>emotionally unstable</p>
-    </div>
-
-  </div>
-
-  <!-- NEW COOK -->
-
-  <button id="newChat" class="new-cook-btn">
-    + New Cook
-  </button>
-
-  <!-- SEARCH -->
-
-  <div class="search-wrap">
-
-    <input
-      type="text"
-      placeholder="Search chats..."
-      class="search-history"
-    >
-
-  </div>
-
-  <!-- CHAT HISTORY -->
-
-  <div class="chat-history-list" id="chatHistory">
-
-  </div>
-
-  <!-- SWITCH MOOD -->
-
-  <a href="/moods" class="switch-mood-btn">
-    Switch Mood
-  </a>
-
-  <!-- LOGOUT -->
-
-  <button class="logout-btn">
-    Logout
-  </button>
+<span>COOKEDGPT ✨</span>
 
 </div>
-   
 
-  <!-- MAIN CHAT -->
-  <main class="chat-main">
-    <div class="chat-topbar">
-      <div class="topbar-left">
-        <button class="btn-sidebar-toggle" id="sidebar-toggle">☰</button>
-        <div class="active-persona">
-          <span class="active-persona-emoji" id="active-emoji">🔥</span>
-          <div>
-            <div class="active-persona-name">
-              <span id="active-name">SAVAGE</span>
-              <span class="heat-badge" id="active-heat">🔥 7/10</span>
-            </div>
-            <div class="active-persona-sub" id="active-sub">zero mercy protocol</div>
-          </div>
-        </div>
-      </div>
-      
-    </div>
+<div class="sidebar-profile">
 
-    <div class="chat-messages" id="chat-messages">
-      <div class="session-header">
-        <div class="session-emoji" id="session-emoji">🔥</div>
-        <div class="session-label" style="font-family:'Space Mono',monospace;">
-          SESSION · <span class="purple" id="session-name">SAVAGE</span> · <span class="purple" id="session-heat">7/10</span>
-        </div>
-        <div class="session-sub">Anything you say can and will be used against you.</div>
-      </div>
-      <div class="message-wrap">
-        <div class="msg-avatar" id="intro-avatar">🔥</div>
-        <div class="msg-bubble">
-          <p class="msg-text" id="intro-msg">Connection established. Persona loaded. Ready when you are.</p>
-          <p class="msg-time" style="font-family:'Space Mono',monospace;">JUST NOW</p>
-        </div>
-      </div>
-    </div>
+<img
+src="https://i.imgur.com/HeIi0wU.png"
+alt="profile"
+id="userPhoto"
+>
 
-    <div class="chat-input-area">
-      <div class="quick-prompts">
-        <button class="quick-btn">Roast my Spotify</button>
-        <button class="quick-btn">Be brutally honest</button>
-        <button class="quick-btn">What's my biggest flaw?</button>
-        <button class="quick-btn">Rate my life choices</button>
-      </div>
-      <div class="input-box">
-        <input type="text" class="chat-text-input" id="chat-input" placeholder="spill the drama..." autocomplete="off">
-        <button class="btn-send" id="send-btn">➤</button>
-      </div>
-      <div class="chat-disclaimer" style="font-family:'Space Mono',monospace;">✦ COOKEDGPT MAY PRODUCE DEVASTATINGLY ACCURATE OUTPUT</div>
-    </div>
-  </main>
+<div>
+<h4 id="userName">Guest User</h4>
+<p>emotionally unstable</p>
+</div>
+
+</div>
+
+<button id="newChat" class="new-cook-btn">
++ New Cook
+</button>
+
+<div class="search-wrap">
+
+<input
+type="text"
+placeholder="Search chats..."
+class="search-history"
+>
+
+</div>
+
+<div class="chat-history-list" id="chatHistory">
+
+</div>
+
+<a href="/moods" class="switch-mood-btn">
+Switch Mood ✨
+</a>
+
+<button class="logout-btn">
+Logout
+</button>
+
+</div>
+
+<!-- MAIN CHAT -->
+
+<main class="chat-main">
+
+<div class="chat-topbar">
+
+<div class="topbar-left">
+
+<button class="btn-sidebar-toggle" id="sidebar-toggle">
+☰
+</button>
+
+<div class="active-persona">
+
+<span class="active-persona-emoji" id="active-emoji">🔥</span>
+
+<div>
+
+<div class="active-persona-name">
+
+<span id="active-name">SAVAGE</span>
+
+<span class="heat-badge" id="active-heat">🔥 7/10</span>
+
+</div>
+
+<div class="active-persona-sub" id="active-sub">
+zero mercy protocol
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="chat-messages" id="chat-messages">
+
+<div class="session-header">
+
+<div class="session-emoji" id="session-emoji">🔥</div>
+
+<div class="session-label" style="font-family:'Space Mono',monospace;">
+SESSION ·
+<span class="purple" id="session-name">SAVAGE</span>
+·
+<span class="purple" id="session-heat">7/10</span>
+</div>
+
+<div class="session-sub">
+Anything you say can and will be used against you.
+</div>
+
+</div>
+
+<div class="message-wrap">
+
+<div class="msg-avatar" id="intro-avatar">🔥</div>
+
+<div class="msg-bubble">
+
+<p class="msg-text" id="intro-msg">
+Connection established. Persona loaded. Ready when you are.
+</p>
+
+<p class="msg-time" style="font-family:'Space Mono',monospace;">
+JUST NOW
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="chat-input-area">
+
+<div class="quick-prompts">
+
+<button class="quick-btn">Roast my Spotify</button>
+
+<button class="quick-btn">Be brutally honest</button>
+
+<button class="quick-btn">What's my biggest flaw?</button>
+
+<button class="quick-btn">Rate my life choices</button>
+
+</div>
+
+<div class="input-box">
+
+<input
+type="text"
+class="chat-text-input"
+id="chat-input"
+placeholder="spill the drama..."
+autocomplete="off"
+>
+
+<button class="btn-send" id="send-btn">
+➤
+</button>
+
+</div>
+
+<div class="chat-disclaimer" style="font-family:'Space Mono',monospace;">
+✦ COOKEDGPT MAY PRODUCE DEVASTATINGLY ACCURATE OUTPUT
+</div>
+
+</div>
+
+</main>
+
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 <script>
+
 document.addEventListener('DOMContentLoaded', () => {
-  const p = new URLSearchParams(window.location.search);
-  const mk = p.get('mood') || 'savage';
-  const EMOJIS = {diva:'👑',savage:'🔥',sigma:'😶','indian-parents':'🪔',pookie:'🩷',iced:'🧊'};
-  const NAMES = {diva:'DIVA',savage:'SAVAGE',sigma:'SIGMA','indian-parents':'INDIAN PARENTS',pookie:'POOKIE',iced:'ICED'};
-  const INTROS = {
-    diva: "Connection established. DIVA loaded. Darling, let's see what mess you've made of your life.",
-    savage: "Connection established. SAVAGE loaded. No mercy mode activated. Talk.",
-    sigma: "...",
-    'indian-parents': "Beta, we are here. And we have some questions about your life choices.",
-    pookie: "Hiiii pookie! 🩷 Ready to have a little chat? This is going to be so fun for me.",
-    iced: "."
-  };
-  const e = EMOJIS[mk]||'🔥';
-  const n = NAMES[mk]||'SAVAGE';
-  // Set all emojis
-  ['sidebar-history-emoji','intro-avatar'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=e;});
-  const introMsg = document.getElementById('intro-msg');
-  if(introMsg) introMsg.textContent = INTROS[mk] || "Ready when you are.";
+
+const p = new URLSearchParams(window.location.search);
+
+const mk = p.get('mood') || 'savage';
+
+const EMOJIS = {
+diva:'👑',
+savage:'🔥',
+sigma:'😶',
+'indian-parents':'🪔',
+pookie:'🩷',
+iced:'🧊'
+};
+
+const NAMES = {
+diva:'DIVA',
+savage:'SAVAGE',
+sigma:'SIGMA',
+'indian-parents':'INDIAN PARENTS',
+pookie:'POOKIE',
+iced:'ICED'
+};
+
+const INTROS = {
+
+diva:
+"Connection established. DIVA loaded. Darling, let's see what mess you've made of your life.",
+
+savage:
+"Connection established. SAVAGE loaded. No mercy mode activated. Talk.",
+
+sigma:"...",
+
+'indian-parents':
+"Beta, we are here. And we have some questions about your life choices.",
+
+pookie:
+"Hiiii pookie! 🩷 Ready to have a little chat? This is going to be so fun for me.",
+
+iced:"."
+
+};
+
+const e = EMOJIS[mk] || '🔥';
+
+const introMsg = document.getElementById('intro-msg');
+
+if(introMsg){
+introMsg.textContent =
+INTROS[mk] || "Ready when you are.";
+}
+
 });
+
 </script>
+
 </body>
 </html>
