@@ -154,128 +154,277 @@ function initChat() {
   const mood = MOODS[moodKey] || MOODS['savage'];
 
   // Populate static mood elements
-  const setEl = (id, val) => { const el=document.getElementById(id); if(el) el.textContent=val; };
+  const setEl = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
+
   setEl('active-emoji', mood.emoji);
   setEl('active-name', mood.name);
   setEl('active-heat', `🔥 ${intensity}/10`);
   setEl('active-sub', mood.tagline.toLowerCase());
+
   setEl('session-emoji', mood.emoji);
   setEl('session-name', mood.name);
   setEl('session-heat', `${intensity}/10`);
+
   setEl('sidebar-persona-name', mood.name);
   setEl('sidebar-persona-emoji', mood.emoji);
+
   document.title = `CookedGPT — ${mood.name}`;
 
+  // ── MOOD DISPLAY BUTTON ─────────────────────────
+  const moodDisplay = document.getElementById('moodDisplay');
+
+  function updateMoodDisplay() {
+    if (!moodDisplay) return;
+
+    const moodName =
+      document.getElementById('active-name')?.innerText || mood.name;
+
+    const heat =
+      document.getElementById('active-heat')?.innerText || `🔥 ${intensity}/10`;
+
+    moodDisplay.innerText = `${moodName} • ${heat}`;
+  }
+
+  updateMoodDisplay();
+
+  // ── INPUTS ──────────────────────────────────────
   const inputEl = document.getElementById('chat-input');
   const sendBtn = document.getElementById('send-btn');
   const messagesEl = document.getElementById('chat-messages');
-  if (inputEl) inputEl.placeholder = `Say something to ${mood.name.charAt(0)+mood.name.slice(1).toLowerCase()}...`;
 
-  // Sidebar toggle
+  if (inputEl) {
+    inputEl.placeholder =
+      `Say something to ${mood.name.charAt(0) + mood.name.slice(1).toLowerCase()}...`;
+  }
+
+  // ── SIDEBAR TOGGLE ──────────────────────────────
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('sidebar-overlay');
   const toggleBtn = document.getElementById('sidebar-toggle');
+
   let sidebarOpen = window.innerWidth > 768;
 
   function setSidebar(open) {
     sidebarOpen = open;
-    if (sidebar) sidebar.classList.toggle('collapsed', !open);
-    if (overlay) overlay.classList.toggle('show', open && window.innerWidth <= 768);
-    if (toggleBtn) toggleBtn.textContent = open ? '✕' : '☰';
+
+    if (sidebar) {
+      sidebar.classList.toggle('collapsed', !open);
+    }
+
+    if (overlay) {
+      overlay.classList.toggle(
+        'show',
+        open && window.innerWidth <= 768
+      );
+    }
+
+    if (toggleBtn) {
+      toggleBtn.textContent = open ? '✕' : '☰';
+    }
   }
 
-  // Start collapsed on mobile
-  if (window.innerWidth <= 768) setSidebar(false);
+  // Mobile start closed
+  if (window.innerWidth <= 768) {
+    setSidebar(false);
+  }
 
-  if (toggleBtn) toggleBtn.addEventListener('click', () => setSidebar(!sidebarOpen));
-  if (overlay) overlay.addEventListener('click', () => setSidebar(false));
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      setSidebar(!sidebarOpen);
+    });
+  }
+
+  if (overlay) {
+    overlay.addEventListener('click', () => {
+      setSidebar(false);
+    });
+  }
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) { if(overlay) overlay.classList.remove('show'); }
+    if (window.innerWidth > 768) {
+      if (overlay) overlay.classList.remove('show');
+    }
   });
 
-  // Quick prompts
+  // ── QUICK PROMPTS ───────────────────────────────
   document.querySelectorAll('.quick-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      if (inputEl) { inputEl.value = btn.textContent; inputEl.focus(); playSelect(); }
+      if (inputEl) {
+        inputEl.value = btn.textContent;
+        inputEl.focus();
+        playSelect();
+      }
     });
   });
 
-  function addMessage(text, isUser=false) {
+  // ── ADD MESSAGE ─────────────────────────────────
+  function addMessage(text, isUser = false) {
+
     const wrap = document.createElement('div');
-    wrap.className = 'message-wrap' + (isUser?' user-wrap':'');
+    wrap.className =
+      'message-wrap' + (isUser ? ' user-wrap' : '');
+
     const bubble = document.createElement('div');
-    bubble.className = 'msg-bubble' + (isUser?' user-bubble':'');
+    bubble.className =
+      'msg-bubble' + (isUser ? ' user-bubble' : '');
+
     const txt = document.createElement('p');
     txt.className = 'msg-text';
     txt.textContent = text;
+
     const time = document.createElement('p');
     time.className = 'msg-time';
+
     const now = new Date();
-    time.textContent = now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+
+    time.textContent = now.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
     bubble.appendChild(txt);
     bubble.appendChild(time);
+
     if (!isUser) {
       const av = document.createElement('div');
+
       av.className = 'msg-avatar';
       av.textContent = mood.emoji;
+
       wrap.appendChild(av);
     }
+
     wrap.appendChild(bubble);
-    if (messagesEl) { messagesEl.appendChild(wrap); messagesEl.scrollTop = messagesEl.scrollHeight; }
+
+    if (messagesEl) {
+      messagesEl.appendChild(wrap);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
   }
 
+  // ── TYPING ──────────────────────────────────────
   function showTyping() {
+
     const wrap = document.createElement('div');
+
     wrap.id = 'typing-indicator';
     wrap.className = 'message-wrap';
+
     const av = document.createElement('div');
+
     av.className = 'msg-avatar';
     av.textContent = mood.emoji;
+
     const bubble = document.createElement('div');
+
     bubble.className = 'msg-bubble';
-    bubble.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+
+    bubble.innerHTML =
+      '<div class="typing-dots"><span></span><span></span><span></span></div>';
+
     wrap.appendChild(av);
     wrap.appendChild(bubble);
-    if (messagesEl) { messagesEl.appendChild(wrap); messagesEl.scrollTop = messagesEl.scrollHeight; }
+
+    if (messagesEl) {
+      messagesEl.appendChild(wrap);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
     return wrap;
   }
 
+  // ── SEND MESSAGE ────────────────────────────────
   async function sendMessage() {
-    const text = inputEl ? inputEl.value.trim() : '';
-    if (!text) { if(inputEl){inputEl.style.animation='shake .3s ease'; setTimeout(()=>inputEl.style.animation='',300);} return; }
+
+    const text =
+      inputEl ? inputEl.value.trim() : '';
+
+    if (!text) {
+
+      if (inputEl) {
+        inputEl.style.animation = 'shake .3s ease';
+
+        setTimeout(() => {
+          inputEl.style.animation = '';
+        }, 300);
+      }
+
+      return;
+    }
+
     if (inputEl) inputEl.value = '';
+
     addMessage(text, true);
+
     playSend();
 
     const typingEl = showTyping();
+
     if (sendBtn) sendBtn.disabled = true;
 
     try {
+
       const res = await fetch('/chat_message', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({message:text, mood:moodKey, intensity})
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify({
+          message: text,
+          mood: moodKey,
+          intensity
+        })
       });
+
       const data = await res.json();
+
       typingEl.remove();
+
       addMessage(data.reply || '...');
+
       playReceive();
-    } catch(e) {
+
+    } catch (e) {
+
       typingEl.remove();
-      addMessage("Connection dropped. Even the server couldn't handle you.");
+
+      addMessage(
+        "Connection dropped. Even the server couldn't handle you."
+      );
+
       playReceive();
+
     } finally {
+
       if (sendBtn) sendBtn.disabled = false;
+
       if (inputEl) inputEl.focus();
     }
   }
 
-  if (sendBtn) sendBtn.addEventListener('click', sendMessage);
-  if (inputEl) inputEl.addEventListener('keydown', e => {
-    if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-  });
+  // ── EVENTS ──────────────────────────────────────
+  if (sendBtn) {
+    sendBtn.addEventListener('click', sendMessage);
+  }
+
+  if (inputEl) {
+    inputEl.addEventListener('keydown', e => {
+
+      if (e.key === 'Enter' && !e.shiftKey) {
+
+        e.preventDefault();
+
+        sendMessage();
+      }
+    });
+  }
 }
+
 
 // ── ROUTER ─────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
