@@ -172,30 +172,14 @@ function initChat() {
   setEl('sidebar-persona-emoji', mood.emoji);
 
   document.title = `CookedGPT — ${mood.name}`;
-  // MOOD DISPLAY BUTTON
+  // ── MOOD DISPLAY BUTTON ─────────────────────────
 const moodDisplay = document.getElementById('moodDisplay');
 
 if (moodDisplay) {
-  moodDisplay.innerText =
-    `${mood.name} • 🔥 ${intensity}/10`;
+moodDisplay.innerText =
+`${mood.name} • 🔥 ${intensity}/10`;
 }
 
-  // ── MOOD DISPLAY BUTTON ─────────────────────────
-  const moodDisplay = document.getElementById('moodDisplay');
-
-  function updateMoodDisplay() {
-    if (!moodDisplay) return;
-
-    const moodName =
-      document.getElementById('active-name')?.innerText || mood.name;
-
-    const heat =
-      document.getElementById('active-heat')?.innerText || `🔥 ${intensity}/10`;
-
-    moodDisplay.innerText = `${moodName} • ${heat}`;
-  }
-
-  updateMoodDisplay();
 
   // ── INPUTS ──────────────────────────────────────
   const inputEl = document.getElementById('chat-input');
