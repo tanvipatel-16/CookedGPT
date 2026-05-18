@@ -237,8 +237,7 @@ if (moodDisplay) {
   if (toggleBtn) {
     toggleBtn.textContent = open ? '✕' : '☰';
   }
-
-}
+    
   
   }
 
