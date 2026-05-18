@@ -172,6 +172,13 @@ function initChat() {
   setEl('sidebar-persona-emoji', mood.emoji);
 
   document.title = `CookedGPT — ${mood.name}`;
+  // MOOD DISPLAY BUTTON
+const moodDisplay = document.getElementById('moodDisplay');
+
+if (moodDisplay) {
+  moodDisplay.innerText =
+    `${mood.name} • 🔥 ${intensity}/10`;
+}
 
   // ── MOOD DISPLAY BUTTON ─────────────────────────
   const moodDisplay = document.getElementById('moodDisplay');
@@ -206,24 +213,33 @@ function initChat() {
   const toggleBtn = document.getElementById('sidebar-toggle');
 
   let sidebarOpen = window.innerWidth > 768;
-
   function setSidebar(open) {
-    sidebarOpen = open;
 
-    if (sidebar) {
-      sidebar.classList.toggle('collapsed', !open);
+  sidebarOpen = open;
+
+  if (sidebar) {
+
+    if (open) {
+      sidebar.classList.remove('collapsed');
+    } else {
+      sidebar.classList.add('collapsed');
     }
 
-    if (overlay) {
-      overlay.classList.toggle(
-        'show',
-        open && window.innerWidth <= 768
-      );
-    }
+  }
 
-    if (toggleBtn) {
-      toggleBtn.textContent = open ? '✕' : '☰';
-    }
+  if (overlay) {
+    overlay.classList.toggle(
+      'show',
+      open && window.innerWidth <= 768
+    );
+  }
+
+  if (toggleBtn) {
+    toggleBtn.textContent = open ? '✕' : '☰';
+  }
+
+}
+  
   }
 
   // Mobile start closed
